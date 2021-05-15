@@ -1,0 +1,252 @@
+//1068
+#include<stdio.h>
+
+int tree[50];
+int node;
+int count;
+
+void search(int nod) {
+	for (int i = 0; i < node; i++) {
+		//자식노드가 아님:해당 노드를 바라보는 자식이 있다는 의미이므로 return한다
+		if (tree[i] == nod)
+			return;
+	}
+
+	//해당 노드가 자식노드이면
+	count++;
+}
+
+int main() {
+	int del;
+	//노드개수 입력받음
+	scanf("%d", &node);
+	//부모노드입력받음
+	for (int i = 0; i < node; i++)
+		scanf("%d", &tree[i]);
+	//삭제할 노드입력받음
+	scanf("%d", &del);
+	//삭제할 노드는 -1로 바꿈
+	tree[del] = -1;
+
+	
+	//자식노드 지움
+	for (int i = 0; i < node; i++) {
+		if (tree[i] == del)
+			tree[i] = -1;
+	}
+
+	//해당 노드가 자식인지 아닌지 탐색한다
+	for (int i = 0; i < node; i++) {
+		if (tree[i] != -1) {
+			search(i);
+		}
+	}
+
+	//root노드 하나 남을 경우
+	int parent = 0;
+
+	for (int i = 0; i < node; i++) {
+		if (tree[i] == -1)
+			parent++;
+	}
+	if (parent == node)
+		count = 1;
+
+
+	if (node == 1)
+		count = 0;
+
+	printf("%d\n", count);
+}
+//7469
+#include <iostream>
+
+#include <algorithm>
+
+using namespace std;
+
+const int MAX = 100000;
+int N, M;
+pair<int, int> arr[MAX + 1]; //value, idx
+
+int Kth(int start, int end, int k)
+
+{
+	int cnt = 0;
+
+	for (int i = 0; i < N; i++)
+
+	{
+		//second가 인덱스이므로
+
+		if (start <= arr[i].second && arr[i].second <= end)
+
+			cnt++;
+
+		//k 번째 숫자 반환
+
+		if (cnt == k)
+
+			return arr[i].first;
+
+	}
+
+	return -1;
+
+}
+
+
+
+int main(void)
+
+{
+
+	ios_base::sync_with_stdio(0);
+	cin.tie(0); //cin 실행속도 향상
+	cin >> N >> M;
+
+
+	for (int i = 0; i < N; i++)
+
+	{
+
+		cin >> arr[i].first;
+
+		arr[i].second = i + 1;
+
+	}
+
+	//value 기준으로 오름차순 정렬
+
+	sort(arr, arr + N);
+
+	for (int i = 0; i < M; i++)
+
+	{
+		int start, end, k;
+
+		cin >> start >> end >> k;
+
+		cout << Kth(start, end, k) << "\n";
+
+	}
+
+	return 0;
+
+}
+//12865
+#include <iostream> 
+#define getmax(x,y) (x>y ? x : y)
+using namespace std;
+
+int weight[101];
+int value[101];
+int arr[105][100005];
+int n, k;
+
+int backPack(int x, int y);
+
+int main() {
+	cin >> n >> k;
+
+	for (int i = 0; i < n; i++) {
+		cin >> weight[i];
+		cin >> value[i];
+	}
+
+	cout << backPack(n, k);
+}
+
+int backPack(int x, int y) {
+
+	for (int i = 1; i <= x; i++) {
+		for (int j = 1; j <= y; j++) {
+
+			if (weight[i - 1] > j) 
+				arr[i][j] = arr[i - 1][j]; 
+
+			else {
+				int tmp = j - weight[i - 1];
+				arr[i][j] = getmax(value[i - 1] + arr[i - 1][tmp], arr[i - 1][j]);
+			}
+			
+		}
+	}
+	return arr[x][y];
+	// 입력값인 x,y까지 arr를 구해서 리턴 
+}
+
+/*int main()
+{
+	int N, max, value = 0, maxvalue = 0;
+	cin >> N >> max;
+	int a, b;
+	vector< pair<int, int> > v;
+	for (int i = 0; i < N; i++)
+	{
+		cin >> a >> b;
+		v.push_back(make_pair(a, b));
+	}
+	for(int)
+	for (int i = 0; i < N - 1; i++)
+		for (int j = i + 1; j < N; j++)
+		{
+			if (v[i].first + v[j].first <= max)
+			{
+				value = v[i].second + v[j].second;
+				if (maxvalue < value)
+				{
+					maxvalue = value;
+				}
+
+			}
+
+		}
+	for (int i = 0; i < N - 2; i++)
+		for (int j = i + 1; j < N-1; j++)
+			for(int k=j+1;k<N;k++)
+			{
+				if (v[i].first + v[j].first + v[k].first < max)
+				{
+					value = v[i].second + v[j].second+v[k].first;
+					if (maxvalue < value)
+					{
+						maxvalue = value;
+					}
+				}
+
+			}
+	cout << maxvalue;
+	
+	return 0;
+}*/
+//파이썬
+#include<iostream>
+#include<time.h>
+#include<iomanip>
+
+using namespace std;
+
+int main()
+{
+	time_t start, end; double result;
+
+
+	cout << "1에서 백만까지 더합니다 " << endl;
+	int num = 0;
+	start = time(NULL);
+
+	for (int i = 1; i <= 1000000; i++)
+	{
+		num += i;
+	}
+
+	end = time(NULL); 
+	result = (double)(end - start);
+
+	cout << "1에서 백만까지 더한 결과:"<<num<<endl;
+	
+	cout << "총 계산시간:" <<fixed<<setprecision(20)<<"    "<<result ;
+	return 0;
+}
+
