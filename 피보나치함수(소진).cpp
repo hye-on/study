@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	int t; //테스트 케이스의 개수를 저장할 배열
+	int zero[41], one[41]; //0과 1의 개수를 저장할 배열
+
+	cin >> t;
+
+	zero[0] = 1;
+	zero[1] = 0;
+	one[0] = 0;
+	one[1] = 1;
+
+	vector<int> n(t);//테스트 케이스 입력받을 벡터
+
+	//테스트 케이스 입력
+	for (int i = 0; i < t; i++)
+	{
+		cin >> n[i];
+	}
+
+	//배열에 0과 1의 개수 저장
+	for (int i = 0; i < 41; i++)
+	{
+		if (i >= 2)
+		{
+			zero[i] = zero[i - 1] + zero[i - 2];
+			one[i] = one[i - 1] + one[i - 2];
+		}
+	}
+
+	//테스트 케이스의 0과 1의 개수 출력
+	for (int i = 0; i < t; i++)
+	{
+		cout << zero[n[i]] << " " << one[n[i]] << endl;
+	}
+	
+
+	return 0;
+}
