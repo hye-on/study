@@ -4,17 +4,17 @@ int i, j, temp, k, N = 0;
 int div[50] = {};
 
 int FindN(int num[]) {
-	// ¹è¿­ Å©±â°¡ Â¦¼öÀÎÁö È¦¼öÀÎÁö
+	// ë°°ì—´ í¬ê¸°ê°€ ì§ìˆ˜ì¸ì§€ í™€ìˆ˜ì¸ì§€
 	if (k != 1) {
 		return num[0] * num[k-1];
 	}
-	else {	//Á¦°ö¼ö¸é Áß°£¸¸ Á¦°öÇÏ±â
+	else {	//ì œê³±ìˆ˜ë©´ ì¤‘ê°„ë§Œ ì œê³±í•˜ê¸°
 		return num[0] * num[0];
 	}
 
 }
 
-void Sort(int num[]) { //¿À¸§Â÷¼ø Á¤·Ä
+void Sort(int num[]) { //ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
 	for (i = 0; i < k - 1; i++) {
 		for (j = i + 1; j < k; j++) {
 			if (num[i] > num[j]) {
@@ -27,7 +27,7 @@ void Sort(int num[]) { //¿À¸§Â÷¼ø Á¤·Ä
 }
 int main() {
 
-	// ÀÔ·Â
+	// ì…ë ¥
 	scanf_s("%d", &k);
 	for (i = 0; i < k; i++) {
 		scanf_s("%d", &div[i]);
@@ -35,6 +35,6 @@ int main() {
 	Sort(div);
 	N = FindN(div);
 	
-	//Ãâ·Â
+	//ì¶œë ¥
 	printf("%d", N);
 }
