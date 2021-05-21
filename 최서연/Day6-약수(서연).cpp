@@ -2,9 +2,9 @@
 #include <algorithm>
 using namespace std;
 
-//¹éÁØ 1037: ¾à¼ö
-//³»¿ë: ÁøÂ¥ ¾à¼ö n¸¦ ÀÔ·Â¹Þ°í ¿ø·¡ ¼ö¸¦ Ãâ·ÂÇÏ±â
-//»ç¿ë¾Ë°í¸®Áò: algorithm Çì´õÀÇ sort
+//ë°±ì¤€ 1037: ì•½ìˆ˜
+//ë‚´ìš©: ì§„ì§œ ì•½ìˆ˜ në¥¼ ìž…ë ¥ë°›ê³  ì›ëž˜ ìˆ˜ë¥¼ ì¶œë ¥í•˜ê¸°
+//ì‚¬ìš©ì•Œê³ ë¦¬ì¦˜: algorithm í—¤ë”ì˜ sort
 
 long arr[50] = { 0 };
 
