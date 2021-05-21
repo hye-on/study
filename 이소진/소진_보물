@@ -5,13 +5,13 @@ using namespace std;
 
 int main()
 {
-	//º¯¼ö ¼±¾ð
+	//ë³€ìˆ˜ ì„ ì–¸
 	int n, s = 0;
 
-	//ÀÔ·Â ¹ÞÀ½
+	//ìž…ë ¥ ë°›ìŒ
 	cin >> n;
 
-	//º¤ÅÍa, º¤ÅÍb ¸¸µé°í, °ª ÀÔ·Â
+	//ë²¡í„°a, ë²¡í„°b ë§Œë“¤ê³ , ê°’ ìž…ë ¥
 	vector<int> a(n);
 	vector<int> b(n);
 
@@ -24,11 +24,11 @@ int main()
 		cin >> b[i];
 	}
 
-	//¹è¿­ÀÇ °ªµéÀ» ¿À¸§Â÷¼øÀ¸·Î Á¤·Ä
+	//ë°°ì—´ì˜ ê°’ë“¤ì„ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬
 	sort(a.begin(), a.end());
 	sort(b.begin(), b.end());
 
-	//s¿¡ °ª ÀúÀå
+	//sì— ê°’ ì €ìž¥
 	for (int i = 0; i < n; i++)
 	{
 		s += (a[i] * b[n - i - 1]);
