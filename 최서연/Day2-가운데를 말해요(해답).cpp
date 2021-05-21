@@ -5,20 +5,20 @@
 #include <functional>
 using namespace std;
 
-//¹éÁØ 1655¹ø: °¡¿îµ¥¸¦ ¸»ÇØ¿ä
-//ÇØ¼³: ÈüÀ» »ç¿ëÇÑ Ç®ÀÌ. 
+//ë°±ì¤€ 1655ë²ˆ: ê°€ìš´ë°ë¥¼ ë§í•´ìš”
+//í•´ì„¤: í™ì„ ì‚¬ìš©í•œ í’€ì´. 
 
-int n;		//ÀÔ·ÂµÉ ¼öÀÇ °¹¼ö
-priority_queue<int> maxq;								//ÃÖ´ë Èü
-priority_queue<int, vector<int>, greater<int>> minq;	//ÃÖ¼Ò Èü
+int n;		//ì…ë ¥ë  ìˆ˜ì˜ ê°¯ìˆ˜
+priority_queue<int> maxq;								//ìµœëŒ€ í™
+priority_queue<int, vector<int>, greater<int>> minq;	//ìµœì†Œ í™
 
 int main() {
-	scanf_s("%d", &n);	//n ¹Ş±â
-	for (int i = 0; i < n; i++) {	//n°³ÀÇ ¼ö ÀÔ·Â ¹Ş°í Ã³¸®ÇÏ±â
+	scanf_s("%d", &n);	//n ë°›ê¸°
+	for (int i = 0; i < n; i++) {	//nê°œì˜ ìˆ˜ ì…ë ¥ ë°›ê³  ì²˜ë¦¬í•˜ê¸°
 		int x;
 		scanf_s("%d", &x);
 
-		//ÃÖ´ë, ÃÖ¼Ò Å¥ Áß ¾îµğ¿¡ ÀÔ·Â°ªÀ» ³ÖÀ»Áö ÆÇº°(maxq°¡ Ç×»ó minqº¸´Ù Å©±â°¡ °°°Å³ª 1Ä¿¾ßÇÔ)
+		//ìµœëŒ€, ìµœì†Œ í ì¤‘ ì–´ë””ì— ì…ë ¥ê°’ì„ ë„£ì„ì§€ íŒë³„(maxqê°€ í•­ìƒ minqë³´ë‹¤ í¬ê¸°ê°€ ê°™ê±°ë‚˜ 1ì»¤ì•¼í•¨)
 		if (maxq.size() == minq.size()) {
 			maxq.push(x);
 		}
@@ -26,7 +26,7 @@ int main() {
 			minq.push(x);
 		}
 
-		//Å¥ Á¤¸®(minqÀÇ topÀÌ maxqº¸´Ù Ç×»ó Ä¿¾ßÇÔ)
+		//í ì •ë¦¬(minqì˜ topì´ maxqë³´ë‹¤ í•­ìƒ ì»¤ì•¼í•¨)
 		if (maxq.size() != 0 && minq.size() != 0 && maxq.top() > minq.top()) {
 			int maxvalue = maxq.top();
 			int minvalue = minq.top();
