@@ -3,12 +3,12 @@
 int a, i;
 int inArr[100], count0[41], count1[41] = {};
 
-// NÀÌ 0¿¡¼­ 40±îÁöÀÇ LUT ¸¸µé±â
-//0ÀÇ °³¼ö ¹Ì¸® ±¸ÇØµÎ´Â ÇÔ¼ö
+// Nì´ 0ì—ì„œ 40ê¹Œì§€ì˜ LUT ë§Œë“¤ê¸°
+//0ì˜ ê°œìˆ˜ ë¯¸ë¦¬ êµ¬í•´ë‘ëŠ” í•¨ìˆ˜
 void fibonacci0()
 {
 	count0[0] = 1;
-	//index 2ºÎÅÍ 40±îÁö ±¸ÇÒ °Í
+	//index 2ë¶€í„° 40ê¹Œì§€ êµ¬í•  ê²ƒ
 	//ex : outArr0[2] = outArr0[0] + outArr0[1];
 	for (i = 2; i < 41; i++) {
 		count0[i] = count0[i - 2] + count0[i - 1];
@@ -17,7 +17,7 @@ void fibonacci0()
 void fibonacci1()
 {
 	count1[1] = 1;
-	//index 2ºÎÅÍ 40±îÁö ±¸ÇÒ °Í
+	//index 2ë¶€í„° 40ê¹Œì§€ êµ¬í•  ê²ƒ
 	//ex : outArr1[2] = outArr1[0] + outArr1[1];
 	for (i = 2; i < 41; i++) {
 		count1[i] = count1[i - 2] + count1[i - 1];
