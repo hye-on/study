@@ -13,7 +13,7 @@ int main()
 		cin >> a[i];
 	}
 
-	//ÁøÂ¥ ¾à¼öÀÇ ÃÖ´ñ°ª°ú ÃÖ¼Ú°ªÀ» °öÇØ NÀ» ±¸ÇÔ
+	//ì§„ì§œ ì•½ìˆ˜ì˜ ìµœëŒ“ê°’ê³¼ ìµœì†Ÿê°’ì„ ê³±í•´ Nì„ êµ¬í•¨
 	int min = 1000000;
 	int max = 2;
 	for (int i = 0; i < num; i++)
