@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 
-//¹éÁØ 1655¹ø: °¡¿îµ¥¸¦ ¸»ÇØ¿ä
-// »ç¿ë ¾Ë°í¸®Áò: ÄüÁ¤·Ä
-//input_Que >> µé¾î¿À´Â °ª ÀúÀåÇÏ´Â ¹è¿­	result_Que >> Áß¾Ó°ª ÀúÀå ¹è¿­
+//ë°±ì¤€ 1655ë²ˆ: ê°€ìš´ë°ë¥¼ ë§í•´ìš”
+// ì‚¬ìš© ì•Œê³ ë¦¬ì¦˜: í€µì •ë ¬
+//input_Que >> ë“¤ì–´ì˜¤ëŠ” ê°’ ì €ìž¥í•˜ëŠ” ë°°ì—´	result_Que >> ì¤‘ì•™ê°’ ì €ìž¥ ë°°ì—´
 
 int input[100000] = { 0 };
 int result[100000] = { 0 };
@@ -12,8 +12,8 @@ void quick_sort(int start, int end) {
 	if (start >= end) return;
 
 	int pivot = start;
-	int i = pivot + 1;	//¿ÞÂÊ Ãâ¹ß
-	int j = end;		//¿À¸¥ÂÊ Ãâ¹ß
+	int i = pivot + 1;	//ì™¼ìª½ ì¶œë°œ
+	int j = end;		//ì˜¤ë¥¸ìª½ ì¶œë°œ
 	int temp;
 
 	while (i <= j) {
