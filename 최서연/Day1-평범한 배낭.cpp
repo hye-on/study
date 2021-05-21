@@ -1,11 +1,11 @@
 #include <iostream>
 #include <algorithm>
 
-//¹éÁØ: 12865¹ø Æò¹üÇÑ ¹è³¶
-//»ç¿ë ¾Ë°í¸®Áò: Knapsack(¹è³¶)¾Ë°í¸®Áò (Âü°í: https://naivep.tistory.com/72)
-// item[][0] > ¹«°Ô		item[][1] > °¡Ä¡
-// D[i][j]> i¹øÂ°±îÁöÀÇ ¹°Ç°À» Å½»öÇÑ »óÅÂ, j¸¸Å­ÀÇ ¹«°Ô¸¦ °¡Á³À» ¶§ °¡´ÉÇÑ ÃÖ´ë °¡Ä¡
-// D[i][j]ÀÇ 2°¡Áö °æ¿ì		1. i¹øÂ° ¹°Ç°À» Æ÷ÇÔÇÏ´Â °æ¿ì		2. i¹øÂ° ¹°Ç°À» Æ÷ÇÔÇÏÁö ¾Ê´Â °æ¿ì
+//ë°±ì¤€: 12865ë²ˆ í‰ë²”í•œ ë°°ë‚­
+//ì‚¬ìš© ì•Œê³ ë¦¬ì¦˜: Knapsack(ë°°ë‚­)ì•Œê³ ë¦¬ì¦˜ (ì°¸ê³ : https://naivep.tistory.com/72)
+// item[][0] > ë¬´ê²Œ		item[][1] > ê°€ì¹˜
+// D[i][j]> ië²ˆì§¸ê¹Œì§€ì˜ ë¬¼í’ˆì„ íƒìƒ‰í•œ ìƒíƒœ, jë§Œí¼ì˜ ë¬´ê²Œë¥¼ ê°€ì¡Œì„ ë•Œ ê°€ëŠ¥í•œ ìµœëŒ€ ê°€ì¹˜
+// D[i][j]ì˜ 2ê°€ì§€ ê²½ìš°		1. ië²ˆì§¸ ë¬¼í’ˆì„ í¬í•¨í•˜ëŠ” ê²½ìš°		2. ië²ˆì§¸ ë¬¼í’ˆì„ í¬í•¨í•˜ì§€ ì•ŠëŠ” ê²½ìš°
 
 using namespace std;
 int item[101][2] = { 0 };
