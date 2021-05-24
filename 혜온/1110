@@ -1,0 +1,37 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+void cycle(int N)
+{
+	
+	int result=0,NN=0;
+	int first = N / 10;
+	int second = N % 10;
+	
+	int count = 0;
+	//2+6 = 8이다. 새로운 수는 68이다. 6+8 = 14이다. 새로운 수는 84이다. 8+4 = 12이다. 새로운 수는 42이다
+	while (NN != N)
+	{
+		result = (first + second)%10;
+		
+		first = second;
+		second = result;
+
+		NN = first * 10 + second;
+		count++;
+
+	}
+	cout << count;
+	
+}
+int main()
+{
+	int N;
+	cin >> N;
+	if (N == 0)
+		cout << 1;
+	else
+		cycle(N);
+
+}
