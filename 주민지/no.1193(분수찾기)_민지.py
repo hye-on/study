@@ -12,4 +12,4 @@ else:
     a=line-X+1
     b=X
     
-print(a, '/', b, res='')
+print(a, '/', b, sep='')
