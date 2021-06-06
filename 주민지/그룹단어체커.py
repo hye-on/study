@@ -9,11 +9,20 @@ words_list=[]
 for i in range(N): #N개의 줄에 단어가 들어온다.
     words = input()
     words_list.append(words)
+
     while words.islower() == False: #대문자 들어왔을 경우 예외처리
         print('단어는 소문자로만 입력되야 합니다.')
         words = input()
         words_list.append(words)
-
+    while len(words) > 100: #단어길이 제한 예외처리
+        print('단어의 길이는 최대 100까지 입니다.')
+        words = input()
+        words_list.append(words)
+    while len(words_list) != len(set(words_list)): #단어 중복입력 예외처리
+        print('입력된 단어는 중복되면 안됩니다.')
+        words_list = []
+        words = input()
+        words_list.append(words)
 
     wrong = 0
     for j in range(len(words) - 1): #0에서 부터 세기 때문에 단어 전체길이-1을 해준다.
@@ -24,3 +33,5 @@ for i in range(N): #N개의 줄에 단어가 들어온다.
     if wrong == 0: #그룹단어가 아니라는 수가 0이라면
         group_word += 1 #해당 단어는 그룹단어이다.
 print(group_word) #최종 그룹단어 개수를 출력한다.
+
+
