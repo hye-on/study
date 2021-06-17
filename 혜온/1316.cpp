@@ -3,54 +3,35 @@
 
 using namespace std;
 
-bool wordCheck(string str) {
-	bool alpabet[26] = { false }; 
 
-	for (int i = 0; i < str.length(); i++) {
-
-		if (alpabet[str[i] - 'a']) {
-			return false;
-
-		}
-		else {                  
-
-			char tmp = str[i];
-			alpabet[str[i] - 'a'] = true; 
-
-			while (1) {
-				if (tmp != str[++i]) {   
-					i--;
-					break;
-				}
-			}
-
-		}
-
-	}
-	return true;
-}
-
-
-
-int main(void) {
-
+int main()
+{
 	int n;
 	cin >> n;
-
-	int count = 0;
-
-	for (int i = 0; i < n; i++) {
-		string str;
+	int count = n;
+	string str;
+	char aa = '1';
+	for (int i = 0; i < n; i++)
+	{
+		bool aToz[26] = { false };
 		cin >> str;
+		for (int j = 0; j < str.length(); j++)
+		{
+			if (aToz[str[j] - 'a'])
+			{
+				count--;
+				break;
+			}
+			else
+			{//a a b b c b c
+				if (str[j] != str[j + 1])
+				{
 
-		if (wordCheck(str)) {
-			count++;
+					aToz[str[j] - 'a'] = true;
+				}
+			}
 		}
-
 	}
 	cout << count;
-
-	return 0;
 }
-
 
