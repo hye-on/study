@@ -4,25 +4,19 @@ using namespace std;
 
 int main() {
 	int a, b;
-	int arr[1000];
-	int sum = 0;
-
 	cin >> a >> b;
-	int k = 1;
-
-	for (int i = 0; i < b;) {
-		for (int j = 0; j < k && i < b; ++j) {
-			arr[i] = k;
-
-			if (i >= (a - 1)) {
-				sum += arr[i];
-			}
-			++i;
+	int sum = 0;
+	int cnt = 0;
+	
+	for (int i = 1; cnt<=b ; i++)
+	{
+		for (int j = 1; j<=i; j++)
+		{
+			cnt++;
+			if (cnt >= a && cnt <= b)
+				sum += i;
 		}
-		++k;
 	}
-
-	cout << sum;
-
+	cout << sum << endl;
 	return 0;
 }
