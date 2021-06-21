@@ -1,0 +1,36 @@
+#include<iostream>
+#include<string>
+using namespace std;
+string Rev(string t)
+{
+	int t_l = t.length();
+	//1250
+	string tt;
+	while (t[t_l] == '0')
+	{
+		t_l -= 1;
+
+	}
+
+	for (int i = 1; i <= t_l; i++)
+	{
+		tt += t[t_l - i];
+
+
+	}
+	return tt;
+
+}
+	
+
+
+
+
+
+int main()
+{
+	string a, b;
+	cin >> a >> b;
+	
+	cout<<stoi(Rev(to_string(stoi(Rev(a)) + stoi(Rev(b)))));
+}
