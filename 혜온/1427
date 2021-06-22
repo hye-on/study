@@ -1,0 +1,21 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main()
+{
+	string N;
+	char temp;
+	cin >> N;
+	int N_l = N.length();
+	for(int i=0;i<N_l-1;i++)
+		for(int j=i+1;j<N_l;j++)
+			if (N[i] < N[j])
+			{
+				temp = N[i];
+				N[i] = N[j];
+				N[j] = temp;
+			}
+	cout << N;
+
+}
