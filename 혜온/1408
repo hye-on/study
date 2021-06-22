@@ -1,36 +1,54 @@
 #include <iostream>
+#include<string>
+#include<iomanip>
 
 using namespace std;
 
 int main()
 {
-	int h, m, s, now, start, result;
-	char t;
-
-	cin >> h >> t >> m >> t >> s;
-	now = s + (m * 60) + (h * 60 * 60);
-
-	cin >> h >> t >> m >> t >> s;
-	start = s + (m * 60) + (h * 60 * 60);
-
-	if (start > now)
+	string current, start,result;
+	cin >> current >> start;
+	
+	int h1, m1, s1, h2, m2, s2, h3, m3, s3;
+		
+	h1 = stoi(current.substr(0, 2));
+	h2 = stoi(start.substr(0, 2));
+	m1 = stoi(current.substr(3, 2));
+	m2 = stoi(start.substr(3, 2));
+	s1 = stoi(current.substr(6, 2));
+	s2 = stoi(start.substr(6, 2));
+	
+	int current_t, start_t;
+	current_t = (h1 * 60 * 60) + (m1 * 60) + s1;
+	start_t = (h2 * 60 * 60) + (m2 * 60) + s2;
+//임무는 현재시간보다 과거에 시작
+	int result_t;
+	
+// 현재 시간<임무시작 시간 . 임무시작시간-현재시간
+	if (current_t < start_t)
 	{
-		result = start - now;
-
-		h = result / 3600;
-		m = (result - (h * 3600)) / 60;
-		s = (result - (h * 3600)) % 60;
+		result_t=start_t - current_t;
+		
 	}
+	//현재 시간>임무시작 시간   24-(현재시간-임무시작시간)
+
 	else
 	{
-		result = 24 * 3600 - (now - start);
-
-		h = result / 3600;
-		m = (result - (h * 3600)) / 60;
-		s = (result - (h * 3600)) % 60;
+		result_t=24 * 60 * 60 - (current_t - start_t);
 	}
+	h3 = result_t / 3600;
+	m3 = (result_t - (h3 * 3600)) / 60;
+	s3 = (result_t - (h3 * 3600)) % 60;
+	
 
-	printf("%02d:%02d:%02d", h, m, s);
+	
 
+	
+	cout << setw(2) <<setfill('0')<< h3 << ":" << setw(2)<< m3 << ":" <<setw(2)<< s3;
+	
+	
 	return 0;
 }
+
+
+
