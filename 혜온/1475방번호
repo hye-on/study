@@ -1,0 +1,32 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main()
+{
+	//0 1 2 3 4 5 6 7 8 
+	int room[9] = { 0 };
+	//35345
+	string N;
+	int cnt = 0;
+	int max=-1;
+	int answer=0;
+	cin >> N;
+	for (int i = 0; i < N.length(); i++)
+	{
+		if(N[i]=='9')
+			room[N[i] - '3']++;
+		else
+		{
+			room[N[i] - '0']++;
+		}
+	}
+	room[6] = room[6] / 2 + room[6] % 2;
+	for (int i = 0; i < 9; i++)
+	{
+		if (room[i] > max)
+			max = room[i];
+	}
+	cout << max;
+
+}
