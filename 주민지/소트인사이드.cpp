@@ -1,9 +1,24 @@
-#include <iostream>
-#include <algorithm>
+#include<iostream>
+#include<string>
 using namespace std;
-int main(void) {
-    string str;
-    cin>>str;
-    sort(str.begin(), str.end(), greater<char>());
-    cout<<str;
+
+int main()
+{
+    string N;
+	cin >> N;
+    char temp;
+
+    for (int i = 0; i < N.length(); i++)
+    {
+        for (int j = 0; j <N.length() - i - 1; j++)
+        {
+            if (N[j] < N[j + 1]) //만약 앞의 숫자가 뒤의 숫자보다 작다면
+            {
+                temp = N[j]; //자리를 바꾸어라
+                N[j] = N[j + 1];
+                N[j + 1] = temp;
+            }
+        }
+    }
+    cout << N;
 }
