@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int cnt = 1;
+	int countE = 1, countS = 1, countM = 1;
+	int E, S, M;
+	cin >> E >> S >> M;
+	while (!(countE == E && countS == S && countM == M))
+	{
+		cnt++;
+		countE++; countS++; countM++;
+		if (countE == 16)
+			countE = 1;
+		if (countS == 29)
+			countS = 1;
+		if (countM == 20)
+			countM = 1;
+	}
+	
+
+	cout << cnt;
+	
+}
