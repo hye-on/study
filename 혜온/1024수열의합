@@ -1,0 +1,62 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	/*int cum = 0;
+	for (int i = 0; i < 100; i++)
+		cum += i;
+	cout << cum;*/
+	int N, L;
+	cin >> N >> L;
+	int i;
+	for (i = L; i <= 100; i++)
+	{
+		//L이 홀수 일때
+		if (i % 2 == 1)
+		{
+
+
+			if (N % i == 0)
+			{
+				int M = N / i;// 중간값
+				if (M >= i / 2 )
+				{
+					M -= i / 2 ;
+					if (M <0) { i = 101; break; }
+					for (int j = 0; j < i; j++)
+						{
+							cout << M + j << " ";
+						}
+						break;
+				}
+			}
+		}
+		else 
+			// L이 짝수일 때
+		{//  44 8 4*11  5 >4    2 3 4 5 6 7 8 9 
+			if ( N / ( i / 2) / 2+1 >= L / 2)
+			{
+				//  나눠 떨어지고 홀수일때만 가능하다.
+				if (N % (i / 2) == 0 && N / (i / 2) % 2 == 1)//
+				{
+					int M=N / (i / 2) / 2 - (i / 2 - 1);
+					if (M <0) { i = 101; break; }
+
+					for (int j = 0; j < i; j++)
+					{
+						cout << M + j << " ";
+					}
+					break;
+				}
+				
+			}
+			
+		}
+
+
+	}
+	if (i == 101)
+		cout << "-1";
+}
