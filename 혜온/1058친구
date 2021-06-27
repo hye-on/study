@@ -1,0 +1,56 @@
+#include<iostream>
+#include<string>
+#include<cstring>
+using namespace std;
+//플로이드 와샬 알고리즘
+int main()
+{
+	int N;
+	int max = -1;
+	int cnt;
+	bool check[50] = { false };
+	cin >> N;
+
+	char f[50][50]= {0};
+	string ff;
+	for(int i=0;i<N;i++)
+	{ 
+		cin >> ff;
+		for (int j = 0; j < N; j++)
+			f[i][j] = ff[j];
+	}
+	
+	
+	for (int i = 0; i < N; i++)//본인
+	{
+		
+		memset(check, false,  N);
+		cnt = 0;
+		
+		for (int u = 0; u < N; u++)//친구
+		{
+		//	cout << "1" << endl;
+			if (f[i][u] == 'Y'&& check[u] == false )
+			{
+				cnt++; check[u] = true; continue;
+				
+			}
+			else if ( i!=u && f[i][u] == 'N')
+			{
+				for (int j = 0; j < N; j++)
+				{
+					if (f[i][j] == 'Y'&&f[u][j] == 'Y' && check[u] == false)
+					{
+						cnt++; check[u] = true;
+					}
+				}
+			}
+			
+		}
+		
+		if (cnt > max)
+			max = cnt;
+	}
+	cout << max;
+			
+}
