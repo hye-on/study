@@ -6,7 +6,7 @@ while (N > 50 or M > 50):
 arr = [] #사각형들의 숫자가 들어갈 곳
 
 for i in range(N):
-    arr.append = (list(input()))
+    arr.append(list(input()))
 res = 0 #답 변수 초기화
 
 check = min(N, M) #행과 열 중 더 작은 것을 기준으로 정사각형을 탐색하겠다.
