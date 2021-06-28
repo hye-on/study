@@ -5,7 +5,7 @@ while N > 100:
     N = int(input())
 
 want_sit = list(map(int, input().split()))
-PC_sit = [0] * 101 # pc방 자리
+PC_sit = [0] * 101 # pc방 자리 모두 비어있다는 뜻으로 0으로 초기화
 refuse = 0 #거절당함
 
 for i in want_sit:
