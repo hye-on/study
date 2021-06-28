@@ -1,0 +1,108 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+int N, M;
+int a[50][50] = { 0 };
+int b[50][50] = { 0 };
+int cnt = 0;
+
+
+
+void h(int i, int j)
+{
+	if (i + 2 < N && j + 2 <  M)
+	{
+		for (int x = i; x < i + 3 ; x++)
+			for (int y = j; y < j + 3 ; y++)
+			{
+				
+				
+					if (a[x][y] == 0)
+						a[x][y] = 1;
+					else
+						a[x][y] = 0;
+				
+			}
+		cnt++;
+	}
+	
+	
+}
+bool isSame()
+{
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < M; j++)
+		{
+			if (a[i][j] != b[i][j])
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+
+int main()
+{
+	
+	cin >> N >> M;
+	
+	
+
+	
+	string aa, bb;
+	for (int i = 0; i < N; i++)
+	{
+		cin >> aa;
+
+		for (int j = 0; j < M; j++)
+		{
+			a[i][j] = aa[j]-'0';
+		}
+	}
+
+	for (int i = 0; i < N; i++)
+	{
+		cin >> bb;
+
+		for (int j = 0; j < M; j++)
+		{
+			b[i][j] = bb[j]-'0';
+		}
+	}
+	if (N >= 3 && M >= 3)
+	{
+
+
+
+		for (int i = 0; i < N; i++)
+		{
+			for (int j = 0; j < M; j++)
+			{
+				if (isSame())
+				{
+					i = N; break;
+				}
+				else if (a[i][j]!=b[i][j])
+					h(i, j);
+			}
+		}
+		if (isSame())
+			cout << cnt;
+		else
+			cout << "-1";
+
+	}
+	else
+	{
+
+		if (isSame())
+			cout << cnt;
+		else
+			cout << "-1";
+	}
+}
