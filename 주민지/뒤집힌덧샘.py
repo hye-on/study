@@ -15,7 +15,7 @@ for i in range(len(zero)):
 for j in range(len(zero)):
     Y = Y.replace(zero[j],"") #0은 모두 빈칸으로 대체한다.
 
-rev_sum = int(X) + int(Y)
+rev_sum = int(X) + int(Y) #322
 temp = "" #빈 문자열 생성
 for k in range(len(str(rev_sum))):
     if k==0:
