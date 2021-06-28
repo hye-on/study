@@ -16,7 +16,7 @@ while 1:
 
 
 while True:
-    if ((year - E) % 15 == 0 and (year - S) % 28 == 0 and (year - M) % 19 == 0):
+    if ((year - E) % 15 == 0 and (year - S) % 28 == 0 and (year - M) % 19 == 0): #각 식은 15, 28, 19로 나누어 떨어진다.
         print(year)
         break
     year += 1
