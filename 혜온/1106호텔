@@ -1,0 +1,59 @@
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+
+bool cmp(const pair<int, int>&a, const pair<int, int>&b)
+{
+	// 비용 사람
+	if ((double)a.second / a.first > (double)b.second / b.first )
+		return true;
+	else
+		return false;
+}
+
+int main()
+{
+	int C, N;
+	int customer = 101,money=100*1001;
+	int tempC = 0, tempM = 0;
+	cin >> C >> N;
+	if (C == 0 || N == 0) {
+		cout << 0 << '\n';
+		return 0;
+	}
+	pair<int, int>city[21];
+	for (int i = 0; i < N; i++)
+	{
+		cin >> city[i].first >> city[i].second;
+
+	}
+	sort(city, city + N,cmp);
+	
+	for (int i = 0; i < N; i++)
+	{
+		
+		while (C > tempC)
+		{
+			tempM += city[i].first;
+			tempC += city[i].second;
+		}
+		if (C == tempC)
+		{
+			money = tempM;
+			break;
+		}
+		
+		if (tempM < money)
+		{
+			money = tempM;
+			customer = tempC;
+		}
+
+		tempM -= city[i].first;
+		tempC -= city[i].second;
+
+	}
+
+	cout << money;
+}
