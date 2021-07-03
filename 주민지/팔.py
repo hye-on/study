@@ -18,4 +18,4 @@ else :
     else :
       if L[i] == '8' : #L과 R의 인덱스 숫자가 같고 L의 인덱스가 8이라면 cnt를 증가시킨다.
         cnt += 1
- print(cnt)
+print(cnt)
