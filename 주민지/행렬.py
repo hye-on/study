@@ -21,10 +21,10 @@ def checkEquality():
     return 1 #AB가 같다면 1을 반환한다.
 
 cnt = 0
-for i in range(0,N-2): #3*3크기의 부분 행렬만 바꿔야 하므로 -2만큼 경계준다.
+for i in range(0,N-2): #0 ~ N-3 부분만 비교해야하므로 N-2를 빼준다. 파이썬은 N-2-1이기 때문
     for j in range(0,M-2):
         if A[i][j] != B[i][j]:
-            flip(i,j)
+            flip(i,j) #AB비교후 값이 같지 않다면 기준 인덱스에서 3*3의 숫자를 모두 뒤집어 버린다.
             cnt+=1
 
 if checkEquality(): #1을 반환받으면 cnt 출력
