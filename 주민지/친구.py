@@ -14,3 +14,5 @@ result = 0
 for j in visit:
     result = max(result,sum(j))
 print(result)
+
+#백준 틀렸다고 함
