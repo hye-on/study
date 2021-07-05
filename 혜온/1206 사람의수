@@ -1,0 +1,68 @@
+#include<iostream>
+#include<string>
+#include<cmath>
+using namespace std;
+
+int main()
+{
+	
+
+	int N;
+
+	cin >> N;
+	double num[100];
+	double result[100] = { 0 };
+	int temp, answer = 0;
+
+	// 곱이 30 보다 작아야함
+	// 소수점 첫번째 자리와 두번째 자리가 9이면  ㅜ.99ㅜ 올림 가능
+	for (int i = 0; i < N; i++)
+		cin >> num[i];
+	int i = 0;
+	
+	while (true)
+	{
+		i++;
+		for (int j = 0; j <N ; j++)//
+		{
+			result[j] = num[j] * i;
+		}
+		int count = 0;
+
+		//검사 0.99 까지
+		for (int j = 0; j < N; j++)
+		{
+			temp = (int)result[j];
+			
+			if (result[j] - temp == 0.0)
+			{
+				answer = i;
+				count++;
+			}
+			/*else if (result[j] - temp > 0.990&&result[j] - temp < 1.0)
+			{
+				answer = i;
+				
+				count++;
+
+			}*/
+			else
+			{
+				
+				if ((int)(floor((ceil(result[j]) / (double)i) * 1000)) == (int)(num[j]*1000))
+				{
+					count++;
+					answer = i;
+				}
+				
+			}
+			
+		}
+		if (count == N)
+			break;
+		
+	}
+	cout << answer << endl;
+	return 0;
+
+}
