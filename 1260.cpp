@@ -5,9 +5,9 @@
 using namespace std;
 
 vector<int> vec[1001];
-bool visit[1001] = { false };//¹æ¹® ÆÇ´Ü ¹è¿­
+bool visit[1001] = { false };//ë°©ë¬¸ íŒë‹¨ ë°°ì—´
 
-//Àç±ÍÇÔ¼ö »ç¿ë
+//ì¬ê·€í•¨ìˆ˜ ì‚¬ìš©
 void dfs(int node) {
 	cout << node << " ";
 	visit[node] = true;
@@ -17,13 +17,13 @@ void dfs(int node) {
 	}
 }
 
-//Å¥ »ç¿ë
+//í ì‚¬ìš©
 void bfs(int node) {
 	queue<int> q;
 	q.push(node);
 	visit[node] = true;
 
-	while (!q.empty()) {	//Å¥°¡ ºô ¶§±îÁö ¹İº¹
+	while (!q.empty()) {	//íê°€ ë¹Œ ë•Œê¹Œì§€ ë°˜ë³µ
 		node = q.front();
 		cout << node << " ";
 		q.pop();
@@ -36,22 +36,22 @@ void bfs(int node) {
 }
 
 int main() {
-	//Á¤Á¡°³¼ö, °£¼±°³¼ö, Å½»ö½ÃÀÛÁ¤Á¡
+	//ì •ì ê°œìˆ˜, ê°„ì„ ê°œìˆ˜, íƒìƒ‰ì‹œì‘ì •ì 
 	int n, m, v;	
 	cin >> n >> m >> v;
 	
 	int a, b;
-	//ÀÎÁ¢¸®½ºÆ® Çü½ÄÀ¸·Î ¼öÄ¡ »ğÀÔ
+	//ì¸ì ‘ë¦¬ìŠ¤íŠ¸ í˜•ì‹ìœ¼ë¡œ ìˆ˜ì¹˜ ì‚½ì…
 	for (int i = 1; i <= m; i++) {	
 		cin >> a >> b;
 		vec[a].push_back(b);
 		vec[b].push_back(a);
 	}
-	for (int i = 1; i <= n; i++)	//¿À¸§Â÷¼øÀ¸·Î Á¤·Ä
+	for (int i = 1; i <= n; i++)	//ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬
 		sort(vec[i].begin(),vec[i].end());
 
 	dfs(v);
 	cout << '\n';
-	fill_n(visit, 1001, false);	//¹è¿­ ÃÊ±âÈ­
+	fill_n(visit, 1001, false);	//ë°°ì—´ ì´ˆê¸°í™”
 	bfs(v);
 }
