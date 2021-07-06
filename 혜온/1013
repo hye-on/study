@@ -1,0 +1,86 @@
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+
+int main()
+{
+	int T;
+	vector<string> v;
+	cin >> T;
+	string vega;
+	bool pattern;
+	bool pattern1;
+	int j;
+	
+	for (int i = 0; i < T; i++)
+	{
+		cin >> vega;
+		pattern = false;
+		pattern1 = false;
+		j = 0;
+		while (j < vega.length())
+		{
+
+
+			if (vega[j] == '1'&&vega[j + 1] == '0' && vega[j + 2] == '0'|| pattern1 && vega[j]=='0' && vega[j+1]=='0' )
+			{
+				pattern = false;
+				
+				if (pattern1)
+					j += 2;
+				else
+					j += 3;
+
+				pattern1 = false;
+				while (vega[j] == '0'&&j < vega.length())
+				{
+					j++;
+				}
+				if (vega[j] == '1')
+				{//100111001101
+					
+					pattern = true;
+					j++;
+					while (vega[j] == '1')
+					{
+						pattern1 = true;
+						j++;
+					}
+					continue;
+				}
+
+
+
+			}
+			else if (vega[j] == '0' && vega[j + 1] == '1')
+			{//0110001011001
+				
+				j += 2;
+				pattern = true;
+				
+				continue;
+
+			}
+            else
+			{
+				
+				pattern = false;
+				break;
+			}
+
+			
+
+		}
+		if (pattern)
+			v.push_back("YES");
+		else
+			v.push_back("NO");
+
+	}
+	for (int i = 0; i < T; i++)
+	{
+		cout << v[i] << endl;
+	}
+	return 0;
+}
