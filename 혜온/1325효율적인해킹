@@ -1,0 +1,60 @@
+#include<iostream>
+#include<cstring>
+#include<vector>
+
+using namespace std;
+
+int nodeCnt[10001] = { 0};
+int N, M,countNode;
+bool node[10001] = { false };
+vector<vector<int>> graph;
+//int graph[10001][10001] = { 0 };
+void dfs(int v)
+{
+	node[v] = true;
+	for (int i = 0; i < graph[v].size(); i++)
+	{
+		int there = graph[v][i];
+		if (!node[there])
+		{
+			countNode++;
+			dfs(there);
+		}
+	}
+
+}
+int main()
+{
+	cin >> N >> M;
+	
+	int a, b;
+	int max = -1;
+	graph.resize(N + 1);
+	
+	for (int i = 0; i < M; i++)
+	{//b를 해킹하면 a도 해킹할 수 있다.
+		cin >> a >> b;
+		graph[b].push_back(a);
+	}
+	for (int i = 1; i <= N; i++)
+	{
+		countNode = 0;
+		dfs(i);
+		nodeCnt[i] = countNode;
+		memset(node+1,0,N);
+	}
+	
+	for (int i = 1; i <= N; i++)
+	{
+		if (nodeCnt[i] > max)
+			max = nodeCnt[i];
+		//cout << nodeCnt[i];
+		
+	}
+	for (int i = 1; i <= N; i++)
+	{
+		if (nodeCnt[i] == max)
+			cout << i << " ";
+	}
+
+}
