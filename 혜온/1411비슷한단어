@@ -1,0 +1,65 @@
+#include<iostream>
+#include<string>
+#include<cstring>
+
+using namespace std;
+
+int main()
+{
+	int N;
+	string same[1000];
+	char aToZ[26] = {NULL};
+	
+	bool change[26] = { false };
+	int count = 0;
+	cin >> N;
+	for (int i = 0; i < N; i++)
+	{
+		cin >> same[i];
+	}
+	for (int i = 0; i < N-1; i++)
+	{
+		
+			for (int j = i+1; j < N; j++)
+			{ 
+				if (same[i].length() != same[j].length())
+				{
+					continue;;
+				}
+				for (int k = 0; k < same[j].length(); k++)
+				{
+
+
+					if (aToZ[same[j][k]-'a'] == NULL && !(change[same[i][k] - 'a']))
+					{
+						aToZ[same[j][k] - 'a'] = same[i][k];
+						change[same[i][k] - 'a'] = true;
+						//cout << "1.  "<< same[i] << " " << same[j] << " " <<same[j][k] << "를 " << same[i][k] <<"로 바꾼다"<< endl;
+
+					}
+					else
+					{
+						
+						if (same[i][k] != aToZ[same[j][k] - 'a'])
+						{
+							
+							//cout << same[i] << " " << same[j] << " 이미 " << same[j][k] <<"를"<< aToZ[same[j][k] - 'a'] << "로 바꿈" << endl;
+							break;
+						}
+					}
+					if (k == same[j].length() - 1)
+					{
+						count++;
+						//cout << same[i] << " 하고  " << same[j] << endl;
+					}
+				}
+				memset(aToZ, NULL, 26);
+				memset(change, false, 26);
+				
+			}
+			
+		
+	}
+	cout << count;
+}	
+
