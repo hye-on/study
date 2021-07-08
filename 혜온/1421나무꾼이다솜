@@ -1,0 +1,67 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+	int N, C, W,min=10001;
+	int tree[50];
+	int cut=0,max=-1,maxIndex=-1;
+	
+	cin >> N >> C >> W;// 나무개수,커트비용,단위당 비용 
+	for (int i = 0; i < N; i++)
+	{
+		cin >> tree[i];
+
+		if (tree[i] > maxIndex)
+			maxIndex = tree[i];
+	}
+	//sort(tree, tree + N);
+	
+	
+
+	int count = 0;
+	int sum;
+//	min = tree[0];
+	
+		for (int i = 1; i <= maxIndex; i++)
+		{
+			sum = 0;
+			
+			for (int j = 0; j < N; j++)
+			{
+
+				if (tree[j] >= i)
+				{
+
+					count = tree[j] / i;// 만약 i==tree[j] 라도 count 변함 x
+					if (tree[j] % i == 0)//나누어 떨어지면 몫보다 한번 덜 자른것
+					{
+						cut = tree[j] / i - 1; //만약 i==tree[j] 이면 cut==0
+
+					}
+					else
+					{
+						cut = tree[j] / i;
+
+					}
+
+
+					if (count*i*W - C * cut > 0)
+					{
+
+						sum += count * i*W - C * cut;
+
+					}
+				}
+					
+			}
+			if (sum> max)
+			{
+				max = sum;
+
+			}
+		}
+		
+	cout << max;
+}
