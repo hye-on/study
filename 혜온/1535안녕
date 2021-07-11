@@ -1,0 +1,32 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+
+int N;
+int dp[21][101]; //i번째 사람의 j 체력일때의 행복 최댓값
+int happy[21];
+int power[21];
+
+int main() {
+	
+	cin >> N;
+	for (int i = 1; i <= N; i++)
+		cin >> power[i];
+	for (int i = 1; i <= N; i++) 
+		cin >> happy[i];
+	int maxnum = -1;
+	for (int i = 1; i <= N; i++) {
+		for (int j = 100; j >= 0; j--) {
+			if (j - power[i] >= 1)
+				dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - power[i]] + happy[i]);
+			else 
+				dp[i][j] = dp[i - 1][j];
+			maxnum = max(maxnum, dp[i][j]);
+		}
+	}
+	cout << maxnum ;
+}
+
