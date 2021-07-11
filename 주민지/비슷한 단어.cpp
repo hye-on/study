@@ -6,7 +6,7 @@ int n, i, j, k, ans;
 string str[101];
 
 int main() {
-	scanf("%d", &n);
+	cin >> n;
 	for (i = 0; i < n; i++) cin >> str[i];
 	for (i = 0; i < n - 1; i++) for (j = i + 1; j < n; j++) {
 		int chk1[27] = { 0 }, chk2[27] = { 0 };
