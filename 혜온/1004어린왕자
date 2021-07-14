@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+int main()
+{
+	int T, n, cnt;
+	double distance1, distance2;
+	int startX, startY, arrivalX, arrivalY;
+	int planet[50][3];
+	cin >> T;
+	while (T > 0)
+	{
+		cnt = 0;
+		cin >> startX >> startY >> arrivalX >> arrivalY;
+		cin >> n;
+		for (int i = 0; i < n; i++)
+			cin >> planet[i][0] >> planet[i][1] >> planet[i][2];
+
+		for (int i = 0; i < n; i++)
+		{
+			distance1 = sqrt((planet[i][0] - startX)*(planet[i][0] - startX) + (planet[i][1] - startY)*(planet[i][1] - startY));
+			distance2 = sqrt((planet[i][0] - arrivalX)*(planet[i][0] - arrivalX) + (planet[i][1] - arrivalY)*(planet[i][1] - arrivalY));
+			//cout << distance1 << "  " << distance2 << endl;
+			if (distance1 >= planet[i][2] && distance2 <= planet[i][2]) 
+				cnt++;
+			else if(distance2 >= planet[i][2] && distance1 <= planet[i][2])
+				cnt++;
+		}
+		T--;
+		cout << cnt << endl;;
+	}
+}
