@@ -1,0 +1,36 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int N,kim,lim,cnt=0;
+	cin>>N >> kim >> lim;
+
+	if (kim > lim)
+	{
+		int temp;
+		temp = kim;
+		kim = lim;
+		lim = temp;
+	}
+	while (true)
+	{
+		cnt++;
+
+		if ((kim + 1) == lim && kim % 2 == 1 && lim % 2 == 0)
+		{
+			break;
+
+		}
+		else
+		{
+			//cout << kim << lim << endl;
+			kim = kim / 2 + kim % 2;
+			lim = lim / 2 + lim % 2;
+		}
+		
+
+	}
+	cout << cnt;
+}
