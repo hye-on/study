@@ -1,0 +1,25 @@
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+
+
+
+int main()
+{
+	int N, L, W, H;
+	double low = 0, high = 1000000000, mid;	
+		cin >> N >> L >> W >> H;
+
+
+	for (int i = 0; i < 60; i++) {//최소 검사값 60
+		mid = (low + high) / 2;
+		if ((long long)(L / mid)*(long long)(W / mid)*(long long)(H / mid) < N)
+			high = mid;
+		else
+			low = mid;
+	}
+	cout << fixed << setprecision(10) << low;
+	return 0;
+}
+ 
