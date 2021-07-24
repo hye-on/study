@@ -1,0 +1,88 @@
+#include<iostream>
+#include<string>
+#include<sstream>
+
+using namespace std;
+
+int main()
+{
+	int N;
+	bool aToZ[26] = { false };
+	
+	cin >> N;
+	cin.ignore();
+	string str;
+	
+	for(int n=0;n<N;n++)
+	{
+		bool second = true;
+		
+		string word[10];
+		
+		getline(cin, str);
+		
+		istringstream ss(str);
+		string stringBuffer;
+		int i = 0;
+		while (getline(ss, stringBuffer, ' ')) {
+			word[i] = stringBuffer;
+			i++;
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			if (aToZ[toupper(word[i][0]) - 'A'] == false)
+			{
+				aToZ[toupper(word[i][0]) - 'A'] = true;
+				second = false;
+
+				
+				for (int j = 0; j < 5; j++)
+				{
+					if (j == i)
+						cout << "[" << word[i][0] << "]" << word[i].substr(1) << " ";
+					else
+						cout << word[j] << " ";
+				}
+				cin.clear();
+				break;
+			}
+
+		}
+		if (second)
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				for (int j = 1; j < word[i].length(); j++)
+				{
+					if (aToZ[toupper(word[i][j]) - 'A'] == false)
+					{
+						second = false;
+						aToZ[toupper(word[i][j]) - 'A'] = true;
+						for (int k = 0; k < 5; k++)
+							if (k == i)
+								cout << word[i].substr(0, j) << "[" << word[i][j] << "]" << word[i].substr(j + 1) << " ";
+							else
+								cout << word[k]<<" ";
+						break;
+						
+					}
+
+				}
+				cin.clear();
+				if(!second)
+					break;
+
+			}
+		}
+		if (second)
+			cout << str;
+		
+	
+		cout << "\n";
+		
+	}
+
+	
+
+	return 0;
+}
