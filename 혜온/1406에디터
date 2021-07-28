@@ -1,0 +1,51 @@
+#include<iostream>
+#include<string>
+#include<list>
+
+using namespace std;
+//. string은 1차원 배열의 형태이기 때문에 중간에 원소를 껴넣거나 제거하는 것이 O(길이)의 시간이 걸립니다.
+int main()
+{
+	string s;
+	int N;
+	cin >> s;
+	cin >> N;
+	list<char> a(s.begin(), s.end());
+
+	auto NL = a.end();
+	char edit;
+	for (int i = 0; i < N; i++)
+	{
+		
+		cin >> edit;
+		
+		if (edit == 'L')
+		{
+			if (NL != a.begin()) NL--;
+		}
+		else if (edit == 'D')
+		{
+			if (NL != a.end()) NL++;
+		}
+		else if (edit == 'B')
+		{
+			if (NL !=a.begin()) NL=a.erase(--NL );
+		}
+		else if(edit=='P')
+		{
+				
+				char temp;
+				cin >> temp;
+				a.insert(NL , temp);
+				
+				
+			
+		}
+
+	}
+	for (auto i = a.begin(); i != a.end(); i++) {
+		cout << *i;
+
+	}
+	
+}
