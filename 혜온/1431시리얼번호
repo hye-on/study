@@ -1,0 +1,64 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+
+using namespace std;
+
+bool compare(string a,string b)
+{
+	if (a.length() < b.length())
+		return true;
+	else if (a.length() > b.length())
+		return false;
+	else
+	{
+		int tempA = 0, tempB = 0;
+		for (int i = 0; i < a.length(); i++)
+		{
+			
+			if (a[i] <= '9')
+			{
+				tempA += a[i] - '0';
+				
+			}
+			if (b[i] <= '9')
+			{
+				tempB += b[i] - '0';
+				
+			}
+		}
+		
+		if (tempA < tempB)
+			return true;
+		else if (tempA > tempB)
+			return false;
+		else
+		{
+			for (int i = 0; i < a.length(); i++)
+			{
+				if (a[i] - b[i] < 0)
+					return true;
+				else if (a[i] - b[i] > 0)
+					return false;
+			}
+			
+		}
+	}
+}
+
+int main()
+{
+	int N;
+	cin >> N;
+	string serialNum[1000];
+	for (int i = 0; i < N; i++)
+	{
+		cin >> serialNum[i];
+	}
+	sort(serialNum, serialNum + N, compare);
+	for (int i = 0; i < N; i++)
+	{
+		cout << serialNum[i] << endl;
+	}
+	
+}
