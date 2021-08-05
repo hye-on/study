@@ -1,0 +1,35 @@
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+
+int main()
+{
+	int N;
+	int squareNum[100001];
+	
+	cin >> N;
+	for (int i = 0; i <= N; i++)
+	{
+		squareNum[i] = i; 
+	}
+	
+	squareNum[1] = 1;
+	
+	for (int i = 1; i <= N; i++)
+	{
+		for (int j = 1; j*j <= i; j++)
+		{
+			squareNum[i] = min(squareNum[i], squareNum[i - j * j] + 1);
+		}
+
+		/*for (int k = i*i+1; k < (i + 1)*(i + 1); k++)
+		{
+			squareNum[k] = squareNum[i*i] + squareNum[k - i * i];
+		}*/
+		
+	}
+	cout << squareNum[N];
+	
+
+}
