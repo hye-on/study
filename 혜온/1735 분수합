@@ -1,0 +1,25 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int a, aa, b, bb;
+	cin >> a >> aa;
+	cin >> b >> bb;
+	int high, low;
+	low = aa * bb;
+	high = a * bb + aa * b;
+	int tempL = low;
+	int tempH = high;
+	int c;
+	while (tempH)
+	{
+		c = tempL % tempH;
+		tempL = tempH;
+		tempH = c;
+	}
+	cout << high / tempL << " " << low / tempL;
+	
+	
+}
