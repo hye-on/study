@@ -1,0 +1,29 @@
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+int main(void) {
+	int n, x;
+	stack<int> s;
+	string str = "";
+
+	cin >> n;
+	int i = 1;
+	while (n--) {
+		cin >> x;
+		while (s.empty() || s.top() < x) {
+			s.push(i++);
+			str += "+\n";
+		}
+		if (s.top() != x) {
+			cout << "NO";
+			return 0;
+		}
+		s.pop();
+		str += "-\n";
+	}
+	cout << str;
+	return 0;
+}
