@@ -1,0 +1,36 @@
+#include <iostream>
+#include <queue>
+ 
+int main() {
+    int test, n, m, input;
+    std::cin >> test;
+    while(test--) {
+        int count(0);
+        std::queue<std::pair<int, int>> queue;
+        std::priority_queue<int> priority_queue;
+        std::cin >> n >> m;
+        for (int i = 0; i < n; i++) {
+            std::cin >> input;
+            //내가 넣은 순서를 판단해야하기에 pair로 집어넣었다.
+            queue.push({ input,i });
+            //priority_queue를 활용해 우선도에 따라 배열이 자동으로 정렬된다.
+            priority_queue.push(input);
+        }
+        while (queue.size()) {
+            int priority = queue.front().first;
+            int num = queue.front().second;
+            if (priority_queue.top() == priority) {
+                count++;
+                priority_queue.pop();
+                queue.pop();
+                //이번 순서가 내가 원하는 순서였다면,
+                if (num == m) break;
+            }
+            else {
+                queue.pop();
+                queue.push({ priority, num });
+            }
+        }
+        std::cout << count << "\n";
+    }
+}
