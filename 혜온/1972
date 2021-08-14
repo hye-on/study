@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+using namespace std;
+void Init()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+}
+string str[10001];
+string check(string s)
+{
+	for (int step = 1; step <= s.length() - 1; step++)
+	{
+		int cnt = 0;
+		for (int j = 0; j+step <=s.length()-1 ; j++)
+		{
+			string btr = "";
+			btr += s[j];
+			btr += s[j + step];
+			for (int k = 0; k <cnt; k++)
+			{
+				if (btr == str[k])return "NOT surprising";
+			}
+			str[cnt++] = btr;
+		}
+		for (int k = 0; k < cnt; k++)
+		{
+			str[k] = "";
+		}
+	}
+	return "surprising";
+}
+int main(void)
+{
+	Init();
+	string s;
+	while (1)
+	{
+		cin >> s;
+		if (s == "*")break;
+		cout <<s<<" is "<<check(s)<<"."<<'\n';
+	}
+}
