@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main()
+{
+    long long count = 0;    
+    int length = 0;            
+    int num;               
+    cin >> num;
+    int temp = num;         
+    while (temp != 0)       
+    {
+        temp /= 10;
+        length++;
+    }
+    count = (num - pow(10, length - 1) + 1) * length;
+    for (int i = 0; i < length - 1; i++)         
+        count += ((i + 1) * 9 * pow(10, i));     
+    cout << count % 1234567;                        
+    return 0;
+}
+
+
