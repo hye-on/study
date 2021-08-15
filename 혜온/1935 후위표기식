@@ -1,0 +1,78 @@
+#include<iostream>
+#include<string>
+#include<stack>
+#include<iomanip>
+
+using namespace std;
+
+int main()
+{
+	int N;
+	cin >> N;
+	string postfix;
+	cin >> postfix;
+	stack<double>s;
+	int aToZ[26] = { 0 };
+	for (int i = 0; i < N; i++)
+	{
+		cin >> aToZ[i];
+	}
+	
+	/*while (!s.empty())
+	{
+		cout << s.top();
+		s.pop();
+	}
+	*/
+	
+
+	for (int i = 0; i < postfix.length(); i++)
+	{
+
+		if (postfix[i] == '*')
+		{
+			double a = s.top();
+			s.pop();
+			double b=s.top();
+			s.pop();
+			//cout <<"a*b"<< a * b;
+			s.push(a*b);
+		}
+		else if (postfix[i] == '/')
+		{
+			double a = s.top();
+			s.pop();
+			double b = s.top();
+			s.pop();
+			//cout << "a/b" << a / b;
+			s.push(b/a);
+		}
+		else if (postfix[i] == '+')
+		{
+			double a = s.top();
+			s.pop();
+			double b = s.top();
+
+			s.pop();
+			//cout << "a+b" << a + b;
+			s.push(a+b);
+		}
+		else if (postfix[i] == '-')
+		{
+			double a = s.top();
+			s.pop();
+			double b = s.top();
+			s.pop();
+			//cout << "a-b" << a - b;
+			s.push(b-a);
+		}
+		
+	
+		if (postfix[i] != '+'&&postfix[i] != '-' && postfix[i] != '*' && postfix[i] != '/')
+		{
+			s.push(aToZ[postfix[i] - 'A']);
+		}
+	}
+	cout <<fixed<<setprecision(2)<< s.top();
+
+}
