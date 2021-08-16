@@ -1,43 +1,56 @@
-#include <iostream>
-#include <string>
+#include<iostream>
+#include<vector>
+#include<string>
+
 using namespace std;
-void Init()
+
+int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(0); cout.tie(0);
-}
-string str[10001];
-string check(string s)
-{
-	for (int step = 1; step <= s.length() - 1; step++)
+
+	while (true)
 	{
-		int cnt = 0;
-		for (int j = 0; j+step <=s.length()-1 ; j++)
-		{
-			string btr = "";
-			btr += s[j];
-			btr += s[j + step];
-			for (int k = 0; k <cnt; k++)
-			{
-				if (btr == str[k])return "NOT surprising";
-			}
-			str[cnt++] = btr;
-		}
-		for (int k = 0; k < cnt; k++)
-		{
-			str[k] = "";
-		}
-	}
-	return "surprising";
-}
-int main(void)
-{
-	Init();
-	string s;
-	while (1)
-	{
+
+		string s;
 		cin >> s;
-		if (s == "*")break;
-		cout <<s<<" is "<<check(s)<<"."<<'\n';
+		if (s == "*")
+			break;
+		else
+		{
+			int sL = s.length();
+			bool check = true;
+			for (int len = 1; len < sL; len++)
+			{
+				vector<string> v;
+				for (int i = 0; i < sL - len; i++)
+				{
+					string temp = "";
+					temp += s[i];
+					temp+=s[i + len];
+					
+					v.push_back(temp);
+				}
+			
+				for (int i = 0; i < v.size(); i++)
+				{
+					for (int j = i + 1; j < v.size(); j++)
+					{
+						if (v[i] == v[j]) {
+							check = false;
+							break;
+						}
+					}
+					if (!check) break;
+
+				}
+			}
+			if (check)
+				cout << s << " is surprising.\n";
+			else
+				cout << s << " is NOT surprising.\n";
+			
+
+
+
+		}
 	}
 }
