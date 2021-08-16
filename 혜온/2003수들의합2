@@ -1,0 +1,51 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int N;
+	long long M;
+	long long sum;
+	int cnt=0;
+	cin >> N >> M;
+	int n[10001] = { 0 };
+	for (int i = 0; i < N; i++)
+	{
+		cin >> n[i];
+	}
+	int front = -1;// back = front + 1;
+	while (true)
+	{
+		sum = 0;
+		front++;
+		//cout << front << "   " << front << endl;
+		
+		for (int i = front; i <N; i++)
+		{
+			sum += n[i];
+			if (sum == M)
+			{
+				cnt++;
+				
+				//cout << sum << endl;
+				break;
+				
+			}
+			else if (sum > M)
+			{
+				
+				break;
+				
+			}
+			
+		}
+		if (front == (N - 1))
+		{
+			break;
+		}
+		
+		
+	}
+	cout << cnt;
+}
