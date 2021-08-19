@@ -1,0 +1,38 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int finger;
+	cin >> finger;
+	long long max;
+	cin >> max;
+	long long ans = 0;
+	if (finger == 1 || finger == 5)
+	{
+		ans = (finger - 1) + 8 * max;
+	}
+	else if(finger==2 || finger==4)
+	{
+		if (max % 2 == 0)// 짝수
+			ans=(finger - 1) + (max) / 2 * 8;
+		else
+		{
+			if (finger == 2)
+				ans = (finger - 1) + max / 2 * 8 + 6;
+			else
+				ans = (finger - 1) + max / 2 * 8 + 2;
+		}
+	}
+	else
+	{
+		if (max % 2 == 0)// 짝수
+			ans=(finger - 1) + (max) / 2 * 8;
+		else
+		{
+			ans=(finger - 1) + max / 2 * 8 + 4;
+		}
+	}
+	cout << ans;
+}
