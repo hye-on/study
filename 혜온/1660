@@ -1,63 +1,86 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
-//#include<cstdlib>
+#include <iostream>
+
+#include <string>
+
+#include <algorithm>
+
 using namespace std;
-long long dp[300002];
 
+ 
 
-int main()
+int main(void)
+
 {
-	int N;
-	cin >> N;
-	
-	fill_n(dp, 300002, 1e9);
-	
+
+        ios_base::sync_with_stdio(0);
+
+        cin.tie(0);
+
+        string a, b;
+
+        cin >> a >> b;
+
+ 
+
+        //겹치는 y, x 찾는 것이 핵심
+
+        int y = 0, x = 0;
+
+        for (int i = 0; i < a.length(); i++)
+
+        {
+
+                 bool searching = true;
+
+                 for(int j=0; j<b.length(); j++)
+
+                         if (a[i] == b[j])
+
+                         {
+
+                                 y = i;
+
+                                 x = j;
+
+                                 searching = false;
+
+                                 break;
+
+                         }
+
+                 if (!searching)
+
+                         break;
+
+        }
+
+ 
+
+        for (int i = 0; i < b.length(); i++)
+
+        {
+
+                 for (int j = 0; j < a.length(); j++)
+
+                         if (j == y && i != x)
+
+                                 cout << b[i];
+
+                         else if (i == x)
+
+                                 cout << a[j];
+
+                         else
+
+                                 cout << ".";
+
+                 cout << "\n";
+
+        }
+
+        return 0;
+
+}
 
 
-	vector<int>tetrahedron;
-	tetrahedron.push_back(0);
-	tetrahedron.push_back(1);
-	
-	//int temp;
-	int a=1, b;
-	
-	for (int i = 2;; i++)
-	{
-		b = a + i;
-		if (tetrahedron[i - 1] + b > 300000) break;
-		tetrahedron.push_back(tetrahedron[i - 1] + b);
-		a = b;
-	}
-	//cout << tetrahedron.size() <<"  "<<tetrahedron[tetrahedron.size()-2]<< endl;
-	/*for (int i = 2; i <= 10; i++)
-	{
-		cout << dp[i] << endl;
-	}*/
-		for (int i = 0; i < tetrahedron.size(); i++)
-		{
-			dp[tetrahedron[i]] = 1;
-		}
 
-		for (int i = 1; i < tetrahedron.size(); i++)
-		{
-			for (int j = tetrahedron[i]; j <= N; j++)
-			{
-				
-				dp[j] = min(dp[j], dp[j - tetrahedron[i]] + 1);
-				//cout << dp[j]<<endl;
-
-			}
-		}
-		cout << dp[N];
-
-
-		/*for (int i = 1; i < 8; i++)
-		{
-			cout << tetrahedron[i] << endl;
-		}*/
-
-
-	}
-
-	
