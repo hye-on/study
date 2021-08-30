@@ -3,7 +3,7 @@ import sys
 info = []
 for line in sys.stdin:info.append([int(e) for e in line.split()])
 sz = len(info)
-dp = [[[0 for _ in range(15+5)]for _ in range(15+5)]for _ in range(sz+1)]
+dp = [[[0 for _ in range(15)]for _ in range(15)]for _ in range(sz+1)]
 
 for i in range(sz):
     for w in range(15+1):
