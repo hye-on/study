@@ -1,31 +1,63 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
+#include<iostream>
+#include<vector>
+#include<algorithm>
+//#include<cstdlib>
 using namespace std;
-using ll = long long;
-#define MAX 300000
+long long dp[300002];
 
-ll dp[MAX + 2];
 
-int main() {
-	ios::sync_with_stdio(NULL);
-	cin.tie(NULL);
+int main()
+{
 	int N;
 	cin >> N;
-	vector<int> v;
-	for (int i = 1;; i++) {
-		int num = i * (i + 1) * (i+2) / 6;
-		if (num > MAX) break;
-		v.push_back(num);
+	
+	fill_n(dp, 300002, 1e9);
+	
+
+
+	vector<int>tetrahedron;
+	tetrahedron.push_back(0);
+	tetrahedron.push_back(1);
+	
+	//int temp;
+	int a=1, b;
+	
+	for (int i = 2;; i++)
+	{
+		b = a + i;
+		if (tetrahedron[i - 1] + b > 300000) break;
+		tetrahedron.push_back(tetrahedron[i - 1] + b);
+		a = b;
+	}
+	//cout << tetrahedron.size() <<"  "<<tetrahedron[tetrahedron.size()-2]<< endl;
+	/*for (int i = 2; i <= 10; i++)
+	{
+		cout << dp[i] << endl;
+	}*/
+		for (int i = 0; i < tetrahedron.size(); i++)
+		{
+			dp[tetrahedron[i]] = 1;
+		}
+
+		for (int i = 1; i < tetrahedron.size(); i++)
+		{
+			for (int j = tetrahedron[i]; j <= N; j++)
+			{
+				
+				dp[j] = min(dp[j], dp[j - tetrahedron[i]] + 1);
+				//cout << dp[j]<<endl;
+
+			}
+		}
+		cout << dp[N];
+
+
+		/*for (int i = 1; i < 8; i++)
+		{
+			cout << tetrahedron[i] << endl;
+		}*/
+
+
 	}
 
-	fill(dp, dp + MAX + 1, 1e9);
-	for (int i = 0;i < v.size(); i++) dp[v[i]] = 1;
 	
-	for (int i = 0; i < v.size(); i++) {
-		for (int j = v[i]; j <= N; j++) {
-			dp[j] = min(dp[j],dp[j - v[i]] + 1);
-		}
-	}
-	cout << dp[N];
-}
