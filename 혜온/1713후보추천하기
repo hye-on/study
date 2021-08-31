@@ -1,0 +1,116 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+int main()
+{
+	int N; //1<=N<=20
+	cin >> N;
+	int recoN;
+	cin >> recoN;
+	int recommendation[101] = { 0 };
+	//recommendation[0] = 10000;
+	vector<int>v;
+	int temp;
+	
+
+	for (int i = 0; i < recoN; i++)
+	{
+		cin >> temp;
+		if (v.size()< N)
+		{
+			
+			if (recommendation[temp] == 0)
+			{
+				v.push_back(temp);
+				recommendation[temp]++;
+			}
+			else
+				recommendation[temp]++;
+		
+		}
+		else
+		{
+			if (recommendation[temp] != 0)
+			{
+				recommendation[temp]++;
+				//cout << temp << endl;
+			}
+			else
+			{
+				//cout << v[0] << v[1] << endl;
+				//cout << recommendation[1] << "   " << recommendation[2] << endl;
+				int min=1001;
+				int idx=0;
+				for (int j = 0; j < N; j++)
+				{
+					
+					if (recommendation[v[j]] < min)
+					{
+						
+						min = recommendation[v[j]];
+						idx = j;
+						
+					}
+
+				}
+				//cout << min << endl;
+				
+				recommendation[v[idx]] = 0;
+				v.erase(v.begin() + idx );
+				
+				v.push_back(temp);
+				recommendation[temp]++;
+				//cout << recommendation[1] << endl;
+			}
+		}
+		
+	}
+	sort(v.begin(), v.end());
+	while (!v.empty())
+	{
+		cout << v.front() << " ";
+		v.erase(v.begin());
+	}
+	
+	//for (int i = 0; i < recoN; i++)
+	//{
+	//	cin >> temp;
+	//	//후보 숫자가 넘으면
+	//	if (i >= N)
+	//	{
+	//		// 후보가 있으면
+	//		for (int j = 0; j < i; j++)
+	//		{
+	//			if (recommendation[j] == temp)
+	//			{
+	//				recommendation[j]++;
+	//				
+	//			}
+	//		}
+
+	//		//후보가 없으면
+	//	}
+	//	else
+	//	{
+
+	//		for (int j = 0; j < i; j++)
+	//		{
+	//			// 이미 숫자가 있으면
+	//			if (recommendation[j] == temp)
+	//			{
+	//				recommendation[j]++;
+	//				break;
+	//			}
+
+	//		}
+	//		// 없으면 후보 추가
+	//		recommendation[i] = temp;
+	//	}
+	//	
+	//}
+
+
+}
