@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+int board[2200][2200];
+int mns=0, zero=0, one=0;
+int flag;
+
+void divide(int x, int y, int n){
+	flag = board[x][y]; //바뀌는지 확인할 때 기준이 될 숫자
+	bool check = true; //숫자가 바뀌는지 안바뀌는지 확인, 바뀌면 false
+
+	for(int i=x; i<x+n; i++){
+		for(int j=y; j<y+n; j++){
+			if(board[i][j] != flag){
+				check = false;
+				break;
+			}
+		}
+	}
+
+	if(check){
+		if(flag == -1) mns++;
+		else if(flag == 0) zero++;
+		else if(flag == 1) one++;
+	}else{
+		n = n/3;
+		divide(x, y, n);
+		divide(x, y+n*2, n);
+		divide(x, y+n, n);
+
+		divide(x+n*2, y, n);
+		divide(x+n*2, y+n*2, n);
+		divide(x+n*2, y+n, n);
+
+		divide(x+n, y, n);
+		divide(x+n, y+n*2, n);
+		divide(x+n, y+n, n);
+	}
+	return;
+}
+
+int main(void){
+	int n;
+	cin >> n;
+
+	for(int i=0; i<n; i++){
+		for(int j=0; j<n; j++){
+			cin >> board[i][j];
+		}
+	}
+
+	divide(0, 0, n);
+	cout << mns << " " << zero << " " << one << "\n";
+	return 0;
+}
