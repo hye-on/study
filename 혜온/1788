@@ -1,0 +1,51 @@
+#include <iostream>
+
+using namespace std;
+
+const int MAX = 1000001;
+int mplus[MAX];
+int mminus[MAX];
+
+int main() {
+	int n;
+	cin >> n;
+	
+	mplus[0] = 0;
+	mminus[0] = 0;
+	mplus[1] = 1;
+	mminus[1] = 1;
+
+	if (n < 0) {
+		n = -1 * n;
+		for (int i = 2; i <= n; i++) {
+			long long int x = (mminus[i - 2] - mminus[i - 1]) % 1000000000;
+			mminus[i] = x;
+		}
+
+		if (mminus[n] < 0)
+			cout << -1 << "\n";
+		else if (mminus[n] == 0)
+			cout << 0 << "\n";
+		else
+			cout << 1 << "\n";
+
+		if (mminus[n] < 0)
+			cout << -1 * mminus[n] << "\n";
+		else
+			cout << mminus[n] << "\n";
+	}
+	else {
+		for (int i = 2; i <= n; i++) {
+			long long int x = (mplus[i - 1] + mplus[i - 2]) % 1000000000;
+			mplus[i] = x;
+		}
+
+		if (mplus[n] == 0)
+			cout << 0 << "\n";
+		else
+			cout << 1 << "\n";
+		cout << mplus[n] << "\n";
+	}
+
+	return 0;
+}
