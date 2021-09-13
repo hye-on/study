@@ -1,79 +1,58 @@
-#include <iostream>
-#include <vector>
+#include<iostream>
+#include<string>
+#include<vector>
+
 using namespace std;
 
-const int MAX = 1e6 + 1;
+int num[1000001];
+vector<int>v;
 
-int minFactor[MAX];
-vector<int> prime;
 
-void eratosthenes(void)
+
+int main()
 {
-	minFactor[0] = minFactor[1] = -1;
-
-	for (int i = 2; i < MAX; i++)
+	int n;
+	cin >> n;
+	long long key;
+	for (int i = 2; i <= 1000000; i++)
 	{
-		minFactor[i] = i;
+		num[i] = i;
 	}
-
-	for (int i = 2; i*i < MAX; i++)
+	for (int i = 2; i*i < 1000001; i++)//n이 소수인지 알아보기 위해서는 루트n까지만 검사하면 되기 때문이다
 	{
-		if (minFactor[i] == i)
+		if (num[i] == i)
 		{
-			for (int j = i * i; j < MAX; j += i)
+			for (int j = i * i; j < 1000001; j += i)//k<i인 k에 대해 i*k까지는 검사를 했기 때문에 i*2가 아니라 i*i부터 검사해도 됨.
 			{
-				if (minFactor[j] == j)
-				{
-					minFactor[j] = i;
-				}
+				num[j] = 0;
 			}
 		}
+
 	}
-
-	for (int i = 2; i < MAX; i++)
+	string s="";
+	for (int i = 0; i < n; i++)
 	{
-		if (minFactor[i] == i)
-		{
-			prime.push_back(i);
-		}
-	}
-}
-
-int main(void)
-{
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	int N;
-	cin >> N;
-
-	eratosthenes();
-
-	for (int n = 0; n < N; n++)
-	{
-		long long S;
-		cin >> S;
+		cin >> key;
 		
-		bool flag = true;
 
-		for (int i = 0; i < prime.size(); i++)
+		for (int i = 2; i < 1000001; i++)
 		{
-			if (S%prime[i] == 0)
+			if (num[i] == i)
 			{
-				flag = false;
+				v.push_back(i);
+			}
 
+		}
+		for (int i = 0; i < v.size(); i++)
+		{
+			if (key%v[i] == 0)
+			{
+				s += "NO\n";
 				break;
 			}
-		}
-
-		if (flag)
-		{
-			cout << "YES\n";
-		}
-		else
-		{
-			cout << "NO\n";
+			if (i == v.size() - 1)
+				s += "YES\n";
 		}
 	}
-
-	return 0;
+	cout << s;
 }
