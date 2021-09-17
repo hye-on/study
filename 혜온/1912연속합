@@ -1,0 +1,63 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int N;
+	cin >> N;
+	//int plus[100000] = { 0 };
+	int ans = 0;
+	int a=0;
+	int temp;
+	int m=-1001;
+	bool check = false;
+	for (int i = 0; i < N; i++)
+	{
+		cin >> temp;
+		if (temp > 0 && !check)//양수의 값이 한번이라도 나왔다면 check true로 바꿔줌
+		{
+			check = true;
+		}
+		//10
+		//10 - 4 3 1 5 6 - 35 12 1 - 1 
+		 //            21         13
+		if (temp < 0)//입력값이 0보다 작을 경우에 그 전까지의 합을 a에 저장해둠
+		{
+			
+			check = false;
+			if(ans>a)// ++--++--  -가 또 나올때 그 전의 값을 저장해둬야 하는데 이미 저장되어있는 합보다 클때만 저장
+				a = ans;
+		}
+		
+		if (temp <= 0 && !check)// 전부다 음수 or 0이 나올 경우 적어도 하나는 선택해야하기 때문에 max값 저장
+		{
+			if (temp > m)
+				m = temp;
+			//cout << temp;
+
+		}
+		if ((ans + temp) < 0)// 합이 0보다 작아질 경우에는 다시 시작
+		{
+			ans = 0;
+			//check = true;
+			continue;// ans에 temp 를 더하지 않기 위해서
+		}
+		ans += temp;
+		
+		
+	}
+	//cout << ans << "   " << a << "  " << m <<"   "<< check<<endl;
+	if (ans == 0 && a == 0) // 둘다 0이라는 것은 0보다 다 작은 값만 나왔기 때문이다.
+	{
+		cout << m << endl;
+		return 0;
+	}
+	
+	if (ans > a)//둘중에 더 큰것을 출력
+		cout << ans << endl;
+	else
+		cout << a << endl;
+	
+	
+}
