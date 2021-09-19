@@ -3,15 +3,13 @@
 #include <cmath>
 using namespace std;
 
-long long k = 0;
-
 void hanoi(int n, int from, int tmp, int to) {
 	if (n == 1)
 		cout << from << ' ' << to << '\n';
 	else {
-		hanoi(n - 1, from, to, tmp);		//¸Ç ¾Æ·¡ À§Ä¡ÇÑ ¿øÆÇÀ» Á¦¿ÜÇÑ ¸ğµç ¿øÆÇÀ» tmp·Î ¿Å±è
-		cout << from << ' ' << to << '\n';	//from¿¡ À§Ä¡ÇÑ ¸Ç ¾Æ·¡ ¿øÆÇÀ» to·Î ¿Å±è
-		hanoi(n - 1, tmp, from, to);		//tmp¿¡ À§Ä¡ÇÑ ¿øÆÇÀ» to·Î ¿Å±è
+		hanoi(n - 1, from, to, tmp);		//ë§¨ ì•„ë˜ ìœ„ì¹˜í•œ ì›íŒì„ ì œì™¸í•œ ëª¨ë“  ì›íŒì„ tmpë¡œ ì˜®ê¹€
+		cout << from << ' ' << to << '\n';	//fromì— ìœ„ì¹˜í•œ ë§¨ ì•„ë˜ ì›íŒì„ toë¡œ ì˜®ê¹€
+		hanoi(n - 1, tmp, from, to);		//tmpì— ìœ„ì¹˜í•œ ì›íŒì„ toë¡œ ì˜®ê¹€
 	}
 }
 
@@ -19,7 +17,7 @@ int main() {
 	int n;
 	cin >> n;
 
-	//ÇÏ³ëÀÌ Å¾¿¡ ´ëÇÑ ¿øÆÇ ÀÌµ¿ È½¼ö = 2^n - 1
+	//í•˜ë…¸ì´ íƒ‘ì— ëŒ€í•œ ì›íŒ ì´ë™ íšŸìˆ˜ = 2^n - 1
 	string s = to_string(pow(2, n));
 
 	int x = s.find('.');
