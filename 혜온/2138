@@ -1,162 +1,101 @@
-#include <iostream>
-
-#include <string>
-
-#include <algorithm>
+#include<iostream>
+#include<string>
 
 using namespace std;
 
- 
-
-const int INF = 987654321;
-
- 
-
-int N, answer;
-
-string s, copyS, result;
-
- 
-
-//스위치 누르는 함수
-
-void push(int idx)
-
+//1080
+//2 3 3 3 3 2 와 같이 가장 적은 방법의 수가 1개가 아니기 때문에 행렬 문제의 방법으로는 해결할 수 없다.
+//하지만 a[0] 전구의 상태를 먼저 결정하면, 각각의 칸을 바꿀 수 있는 방법을 하나로 만들 수 있다.
+//1 2 3 3 3 2 와 같이 볼 수 있고, 이제 a[0]과 b[0]의 상태를 비교하여 다르다면 a[1]의 버튼을 눌러서 상태를 맞출 수 있다
+int main()
 {
+	int n, cnt=0,cnt2=1;
+	string bulb, copyBulb,copyBulb2;
+	cin >> n;
+	cin >> bulb >> copyBulb;
+	copyBulb2 = copyBulb;
+	//1-copyBulb2[1];
+	//copyBulb2[1] += 1;
+	//cout << '1' - copyBulb2[1];
+	copyBulb2[0] = '1' - copyBulb2[0] + '0';
+	copyBulb2[1] = '1' - copyBulb2[1] + '0';
+	//cout << copyBulb << "  b   " << copyBulb2<< endl;
 
-        if (idx > 0)
+	if (bulb == copyBulb)
+	{
+		cout << 0 << endl;
+		return 0;
+	}
+	//0번째 스위치를 누르지 않은 경우
+	for (int i = 1; i < n; i++)
+	{
+		if (bulb[i - 1] != copyBulb[i - 1])
+		{
+			copyBulb[i - 1] = '1' - copyBulb[i - 1] + '0';
+			copyBulb[i] = '1' - copyBulb[i] + '0';
+			copyBulb[i + 1] = '1' - copyBulb[i + 1] + '0';
+			cnt++;
 
-                 copyS[idx - 1] = (copyS[idx - 1] == '0') ? '1' : '0';
+		}
+		if (bulb[i - 1] != copyBulb2[i - 1])
+		{
+			copyBulb2[i - 1] = '1' - copyBulb2[i - 1] + '0';
+			copyBulb2[i] = '1' - copyBulb2[i] + '0';
+			copyBulb2[i + 1] = '1' - copyBulb2[i + 1] + '0';
+			cnt2++;
 
-        copyS[idx] = (copyS[idx] == '0') ? '1' : '0';
+		}
+	}
+	//cout << copyBulb << " v" << copyBulb2 << endl;
+	if (bulb != copyBulb && bulb != copyBulb2)
+	{
+		cout << -1 << endl;
+		return 0;
+	}
+	else if (bulb == copyBulb && bulb != copyBulb2)
+	{
+		cout << cnt;
+	}
+	else if (bulb != copyBulb && bulb == copyBulb2)
+	{
+		cout << cnt2;
+	}
+	else
+	{
+		if (cnt > cnt2)
+			cout << cnt2;
+		else
+			cout << cnt;
+	}
 
-        if (idx < N - 1)
-
-                 copyS[idx + 1] = (copyS[idx + 1] == '0') ? '1' : '0';
+	
+	
 
 }
-
- 
-
-void simulation(int idx, int cnt)
-
-{
-
-        if (idx == N - 1)
-
-        {
-
-                 //같은지 확인
-
-                 bool flag = true;
-
-                 for(int i=0; i<copyS.length(); i++)
-
-                         if (copyS[i] != result[i])
-
-                         {
-
-                                 flag = false;
-
-                                 break;
-
-                         }
-
-                 if (flag)
-
-                         answer = min(answer, cnt);
-
-                 //스위치를 눌러보고 다시 확인
-
-                 push(idx);
-
-                 flag = true;
-
-                 for (int i = 0; i<copyS.length(); i++)
-
-                         if (copyS[i] != result[i])
-
-                         {
-
-                                 flag = false;
-
-                                 break;
-
-                         }
-
-                 if (flag)
-
-                         answer = min(answer, cnt + 1);
-
-                 return;
-
-        }
-
-       
-
-        //스위치를 안 누른 상태
-
-        if (copyS[idx - 1] == result[idx - 1])
-
-                 simulation(idx + 1, cnt);
-
-        //스위치를 누르고
-
-        push(idx);
-
-        if (copyS[idx - 1] == result[idx - 1])
-
-                 simulation(idx + 1, cnt + 1);
-
-        //원상복귀
-
-        push(idx);
-
-}
-
- 
-
-int main(void)
-
-{
-
-        ios_base::sync_with_stdio(0);
-
-        cin.tie(0);
-
-        cin >> N >> s >> result;
-
-       
-
-        answer = INF;
-
-        //0번째 스위치를 누르지 않은 상태에서 시작
-
-        copyS = s;
-
-        simulation(1, 0);
-
-       
-
-        //0번째 스위치를 누른 상태에서 시작
-
-        copyS = s;
-
-        push(0);
-
-        simulation(1, 1);
-
-        if (answer == INF)
-
-                 cout << -1 << "\n";
-
-        else
-
-                 cout << answer << "\n";
-
-        return 0;
-
-}
-
-
-
+//int main()
+//{
+//	int N,cnt=0;
+//	string bulb ,cBulb;
+//	//cout << bulb << " 문자열의 최대 길이 = " << bulb.max_size() << endl;
+//
+//	cin >> N;
+//	cin >> bulb;
+//	cin >> cBulb;
+//	for (int i = 0; i < N; i++)
+//	{
+//		/*if (i<2 || i> N - 3)
+//		{
+//
+//		}
+//		else
+//		{
+//			if (bulb[i] == cBulb[i] && bulb[i + 1] != cBulb[i + 1] && bulb[i + 2] == cBulb[i + 2])
+//			{
+//				cBulb[i] = 1 - bulb[i];
+//				bulb[i + 1] != cBulb[i + 1]
+//			}
+//		}*/
+//		if(bulb[i]!=cBulb[i]||bulb[i]==cBulb[i]&&bulb)
+//	}
+//
+//}
