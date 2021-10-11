@@ -1,0 +1,31 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n, t;
+	cin >> t;
+	while (t--)
+	{
+		int cnt = 0;
+		cin >> n;
+		//소인수분해  2부터나눈다.
+		int m = 2;
+		while (1) {
+			//n=6 m=2;
+			if (n % m == 0) 
+			{
+				n /= m;
+				cnt++;
+			}
+			
+			else {
+				if (cnt > 0) cout << m << " " << cnt << endl;
+				//n==1일떄 소인수분해 끝난거라 break;
+				if (n == 1) break;
+				//m=2의경우 소인수분해끝나서 cnt초기화시킴
+				cnt = 0;
+				m++;
+			}
+		}
+	}
+}
