@@ -1,0 +1,107 @@
+#include<iostream>
+
+using namespace std;
+
+int n, m, count1 = 0;
+
+int polygons[50];
+int polygons2[50];
+int isSame[100][51];
+
+bool check(int i, int j)
+{
+	for (int l = 0, k = j;  l < n; l++, k++)
+	{
+		if (polygons[l] != isSame[i][k])
+		{
+			/*if (i == 2)
+				cout <<"  ss    "<<l<< "  "<<k<< "    "<< polygons[l] << isSame[i][k] << endl;*/
+			return false;
+		}
+		if (k == n - 1)
+			k = -1;
+	}
+	return true;
+
+}
+bool check2(int i, int j)
+{
+	for (int l = 0, k = j; l < n; l++, k--)
+	{
+		if (polygons2[l] != isSame[i][k])
+		{
+			/*if (i == 2)
+				cout << "  ss    " << l << "  " << k << "    " << polygons[l] << isSame[i][k] << endl;*/
+			return false;
+		}
+		if (k == 0)
+			k = n;
+	}
+	return true;
+
+}
+
+int main()
+{
+	
+
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> polygons[i];
+		if (polygons[i] == 1 || polygons[i] == 3)
+			polygons2[i] = 4 - polygons[i];
+		else
+			polygons2[i] = 6 - polygons[i];
+	}
+	cin >> m;
+	/*cout << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cout << polygons2[i] << " ";
+	}
+	cout << endl;*/
+	for (int i = 0; i < m; i++)
+		for (int j = 0; j < n; j++)
+		{
+			cin>>isSame[i][j];
+		}
+
+	//검사
+	for (int i = 0; i < m; i++)
+		for (int j = 0; j < n; j++)
+		{
+			if (polygons[0] == isSame[i][j])
+			{
+				if (check(i, j))
+				{
+					count1++;
+					isSame[i][50] = -1;
+					break;
+				}
+			}
+			if (polygons2[0] == isSame[i][j])
+			{
+				if (check2(i, j))
+				{
+					count1++;
+					isSame[i][50] = -1;
+					break;
+				}
+			}
+
+		}
+	cout << count1 << endl;
+	for (int i = 0; i < m; i++)
+	{
+		if (isSame[i][50] == -1)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				cout << isSame[i][j] << " ";
+			}
+			cout << "\n";
+		}
+
+	}
+}
