@@ -1,0 +1,70 @@
+#include<iostream>
+#include<vector>
+#include<string>
+
+using namespace std;
+int row, col;
+//char u[4][11];
+vector<string>u;
+
+bool ans=true;
+int cnt;
+
+int dfs(int a, int b)
+{
+	cnt = 0;
+	
+	int dx[4] = { 0,-1,0,1 };
+	int dy[4] = { 1,0,-1,0 };
+	
+	for (int i = 0; i < 4; i++)
+	{
+		int x = a + dx[i];
+		int y = b + dy[i];
+		if (x>=0&&x<row&&y>=0&&y<=col&&u[a+dx[i]][b+dy[i]]=='.')
+		{
+			
+			cnt++;
+		}
+
+	}
+
+
+	return cnt;
+}
+
+int main()
+{
+	ios_base::sync_with_stdio(0);
+
+	cin.tie(0);
+	cin >> row >> col;
+	u.resize(row);
+	for (int i = 0; i < row; i++)
+	{
+		cin >> u[i];
+	}
+
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < col; j++)
+		{
+			
+			if (u[i][j] == 'X')
+				continue;
+			
+			if (dfs(i, j) < 2)
+			{
+				ans = false;
+				break;
+			}
+			
+			
+		}
+		if (!ans)
+			break;
+	}
+	cout << 1-ans;
+
+	
+}
