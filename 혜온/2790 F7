@@ -1,0 +1,43 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+
+using namespace std;
+
+int main()
+{
+	int n;
+	cin >> n;
+	vector <int> v;
+	int temp = 0;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> temp;
+		v.push_back(temp);
+	}
+	sort(v.begin(), v.end(),greater<>());
+	
+	int max=v[0]+ 1;
+	//int min = 2000001;
+	int cnt = 1;
+	//cout << endl;
+	for (int i = 1; i < n; i++)
+	{
+		
+			
+
+	
+		if (max  <= n +v[i])
+		{
+			
+			cnt++;
+		}
+		
+		//뒤에 값이 더 커질 수 있기 때문에 max 값 갱신
+		if (v[i] + i+1 > max)
+			max = v[i] + i +1;
+		 
+	}
+	cout << cnt;
+
+}
