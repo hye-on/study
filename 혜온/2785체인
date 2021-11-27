@@ -1,0 +1,42 @@
+#include<iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+	int n;
+	int count = 0;
+	vector <int> v;
+
+	cin >> n;
+
+	for (int i = 0; i < n; i++) {
+		int tmp;
+		cin >> tmp;
+		v.push_back(tmp);
+	}
+
+	sort(v.begin(), v.end());//가장 짧은 체인을 사용하기 위해서!  가장 짧은 체인을 다 사용하면 체인 개수가 줄어들기 때문에
+
+
+	while (true) {
+		if (v.size() == 1)//한개가 되면 그만
+			break;
+
+		v[v.size() - 2] += v[v.size() - 1]; //맨 뒤에 두개 합치기
+		v.pop_back();
+		count++;
+		v[0]--;//고리 사용
+
+		if (v[0] == 0) { // 제일 짧은 고리 다 쓰면 그 다음 고리 쓰기
+			for (int i = 0; i < v.size() - 1; i++) {
+				v[i] = v[i + 1];
+			}
+			v.pop_back();
+		}
+	}
+
+	cout << count;
+
+}
