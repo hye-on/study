@@ -11,7 +11,7 @@ my_cnt = 0
 max_v = max(my_list)
 for i in range(len(my_list)) :
   if my_list[i] >= max_v :
-    my_list += 1
+    my_cnt += 1
   t +=1
   my_list[i+1] += t
   
