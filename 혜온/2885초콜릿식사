@@ -1,0 +1,47 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int n;
+	int count, slice=1;
+	cin >> n;
+	int i = 1;
+	
+	while (true)
+	{
+		if (i > n)
+		{
+			count = i;
+			break;
+		}
+		else if (i == n)
+		{
+			cout << i << " " << 0;
+			return 0;
+		}
+		i *= 2;
+	}
+	//3   4
+
+	while ( (n-(i/2))!=0 )
+	{
+		if (n - (i / 2) > 0)
+		{
+			slice++;
+			n = n - (i / 2);
+			i /= 2;
+		}
+		else if (n - (i / 2) < 0)
+		{
+			i /= 2;
+			slice++;
+		}
+		else
+		{
+			break;
+		}
+	}
+	cout << count << " "<<slice;
+}
