@@ -1,0 +1,128 @@
+#include<iostream>
+
+using namespace std;
+int table[100];
+
+int main()
+{
+	int C, P,count=0;
+	cin >> C >> P;
+	for (int i = 0; i < C; i++)
+	{
+		cin >> table[i];
+	}
+
+	switch (P)
+	{
+		case 1:
+		{
+			count = C;
+			int temp = 0;
+			for (int i = 1; i < C; i++)
+			{
+				if (table[i] == table[i - 1])
+					temp++;
+				else
+					temp = 0;
+				if (temp == 3)
+				{
+					count++;
+					temp -= 1;
+				}
+
+			}
+			break;
+		}
+		case 2:
+		{
+			
+			for (int i = 1; i < C; i++)
+			{
+				if (table[i] == table[i - 1])
+					count++;
+				
+
+			}
+			break;
+		}
+		case 3://001,10, (같 -1), (+1)
+		{
+			for (int i = 0; i + 1 < C; i++)
+			{
+				if (i + 2 < C&&table[i] == table[i + 1] && table[i + 1] - table[i + 2] == -1)
+					count++;
+				if (table[i] - table[i + 1] == 1)
+					count++;
+			}
+			break;
+		}
+		case 4://100,01 (+1,같),-1
+		{
+			for (int i = 0; i + 1 < C; i++)
+			{
+				if (i + 2 < C&&table[i] - table[i + 1] == 1 && table[i + 1] == table[i + 2])
+					count++;
+				if (table[i] - table[i + 1] == -1)
+					count++;
+			}
+			break;
+		}
+		case 5://000,101,10,01 같같, (+1-1) (+1),(-1)
+		{
+			for (int i = 0; i + 1 < C; i++)
+			{
+				if (i + 2 < C&& table[i] == table[i + 1] && table[i + 1] == table[i + 2])
+					count++;
+				if (table[i] - table[i + 1] == +1)
+				{
+					count++;
+					if (i + 2 < C&&table[i + 1] - table[i + 2] == -1)
+						count++;
+				}
+				if (table[i] - table[i + 1] == -1)
+					count++;
+			}
+			break;
+		}
+		case 6://000,00,20,011 같같,같 ,+2,(-1같)
+		{
+			for (int i = 0; i + 1 < C; i++)
+			{
+				if (table[i] == table[i + 1])
+				{
+					count++;
+					
+					if (i + 2 < C&&table[i + 1] == table[i + 2])
+						count++;
+				}
+				else if (table[i] - table[i + 1] == 2)
+					count++;
+				else if (i + 2 < C&&table[i] - table[i + 1] == -1 && table[i + 1] == table[i + 2]) // 0 1 1 
+					count++;
+			}
+			break;
+		}
+		case 7://000,00,02,110
+		{
+			for (int i = 0; i + 1 < C; i++)
+			{
+				if (table[i] == table[i + 1])
+				{
+					count++;
+					if (i + 2 < C&& table[i + 1] == table[i + 2])
+					{
+						count++;
+					}
+				}
+				else if (table[i] - table[i + 1] == -2)
+					count++;
+				 if (i + 2 < C&&table[i] == table[i + 1] && table[i + 1] - table[i + 2] == 1) // 110
+					count++;
+			}
+			break;
+		}
+	}
+
+	
+	cout << count;
+}
