@@ -1,0 +1,89 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+char RC[20][20];
+
+vector<string>v;
+
+int main()
+{
+	int R, C;
+	cin >> R >> C;
+	int count = 0;
+	for (int i = 0; i < R; i++)//0,2 2,0  k
+	{
+		for (int j = 0; j < C; j++)
+		{
+			cin >> RC[i][j];
+
+
+		}
+	}
+
+	for (int i = 0; i < R; i++)//0,2 2,0  k
+	{
+		string s;
+
+		for (int j = 0; j < C; j++)
+		{
+			if (RC[i][j] != '#')
+			{
+				s += RC[i][j];
+				//cout << s << endl;
+			}
+			else
+			{
+				if (s.length() > 1)
+				{
+					//cout << s << endl;
+					v.push_back(s);
+				}
+				s = "";
+			}
+		}
+		if (s.length() > 1)
+		{
+			//cout <<"11     "<< s << endl;
+			v.push_back(s);
+		}
+		s = "";
+
+	}
+	for (int i = 0; i < C; i++)//0,2 2,0  k
+	{
+		string s;
+
+		for (int j = 0; j < R; j++)// 5 4
+		{
+			if (RC[j][i] != '#')
+			{
+				s += RC[j][i];
+				
+			}
+			else
+			{
+				if (s.length() > 1)
+				{
+					
+					v.push_back(s);
+				}
+				s = "";
+			}
+		}
+		if (s.length() > 1)
+		{
+			
+			v.push_back(s);
+		}
+		s = "";
+
+	}
+
+	sort(v.begin(), v.end());
+	cout << v[0];
+
+	
+}
