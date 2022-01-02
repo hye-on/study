@@ -1,32 +1,16 @@
-#include<iostream>
-using namespace std;
-#define MAX 20
+k=int(input())
+size = 1
+max_len = 0
+answer = 0
+while size < k:
+    size *= 2
+    max_len = size
 
-int main() {
-	int K;
-	cin >> K;
-	int num = 1, min_n=-1, how1=0,how2=0;
-	for (int i = 0; i < 20; i++) {
-		num *= 2;
-	}
-	for (int i = 20; i >= 0; i--) {
-		if (min_n==-1 && K > num) {
-			min_n = num*2;
-			how1 = i+1;
-		}
-		else if (min_n == -1 && K == num) {
-			min_n = num;
-			how1 = i;
-		}
-		if (K >= num) {
-			K -= num;
-			if (K == 0) {
-				how2 = i;
-				break;
-			}
-		}
-		num /= 2;
-	}
+while k >0:
+    if k>=size:
+        k-=size
+    else:
+        size /= 2
+        answer+=1
 
-	cout << min_n << " " << how1-how2 << '\n';
-}
+print(max_len, answer)
