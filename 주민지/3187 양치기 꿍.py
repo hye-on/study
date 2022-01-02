@@ -1,48 +1,43 @@
-dx = [0,1,0,-1]
-dy = [-1,0,1,0]
- 
- 
-def bfs(x,y):
-    queue.append = [(x,y)]
+from collections import deque
+import sys
+
+input = sys.stdin.readline
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
+
+def bfs(x, y):
+    q.append([x, y])
     c[x][y] = 1
-    o, v = 0, 0
-    while queue:
-        x, y = queue.popleft()
-        if board[x][y]=='v':
-            v +=1
-        if board[x][y]=='o':
-            o +=1
-        board[x][y]='#'
- 
+    v_cnt, k_cnt = 0, 0
+    while q:
+        x, y = q.popleft()
+        if a[x][y] == 'v':
+            v_cnt += 1
+        elif a[x][y] == 'k':
+            k_cnt += 1
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
- 
-            if 0 <= nx < M and 0 <= ny < N :
-                if board[nx][ny] != '#' and not c[nx][ny]:
+            if 0 <= nx < m and 0 <= ny < n:
+                if a[nx][ny] != '#' and not c[nx][ny]:
                     c[nx][ny] = 1
-                    queue.append((nx,ny))
-    if o<=v :
-        o=0
-    else:
-        v =0
-    return [o, v]
- 
- 
- 
- 
-M, N = map(int, input().split())
-board = [list(input()) for _ in range(M)]
-c = [[0]*n for _ in range(m)]
-queue = deque()
+                    q.append([nx, ny])
 
-O, V = 0, 0
-for i in range(M):
-    for j in range(N):
-        if board[i][j]!='#' and not c[i][j]:
-            o, v = bfs(i,j)
-            O +=o
-            V +=v
- 
- 
-print(O, V)
+    if v_cnt >= k_cnt:
+        k_cnt = 0
+    else:
+        v_cnt = 0
+    return [v_cnt, k_cnt]
+
+m, n = map(int, input().split())
+a = [list(input().strip()) for _ in range(m)]
+c = [[0]*n for _ in range(m)]
+q = deque()
+
+v, k = 0, 0
+for i in range(m):
+    for j in range(n):
+        if a[i][j] != '#' and not c[i][j]:
+            v_cnt, k_cnt = bfs(i, j)
+            v += v_cnt; k += k_cnt
+print(k, v)
