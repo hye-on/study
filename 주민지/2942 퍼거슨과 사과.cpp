@@ -3,12 +3,12 @@
 using namespace std;
 
 int gcd(int a, int b){
-	int n;
+	int temp;
 
 	while(b!=0){
-		n=a%b;
+		temp=a%b;
 		a=b;
-		b=n;
+		b=temp;
 	}
 	
 	return a;
