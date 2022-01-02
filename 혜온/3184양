@@ -1,0 +1,69 @@
+#include<iostream>
+
+using namespace std;
+
+char RC[250][250];
+bool check[250][250];
+int o, v;
+int R, C;
+
+int tempO, tempV;
+int dx[] = { 1, 0 ,-1,0 };
+int dy[] = { 0,-1 ,0, 1 };
+
+void dfs(int x,int y)
+{
+	check[x][y] = true;
+	
+	
+	
+	for (int i = 0; i < 4; i++)
+	{
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+		if (nx < 0 || ny < 0 || nx >= R || ny >= C)
+			continue;
+		if (!check[nx][ny] && RC[nx][ny] != '#')
+		{
+			if (RC[nx][ny] == 'o')
+				tempO++;
+			if (RC[nx][ny] == 'v')
+				tempV++;
+			dfs(nx, ny);
+		}
+	}
+			
+}
+int main()
+{
+	cin >> R >> C;
+
+	for (int i = 0; i < R; i++)
+		for (int j = 0; j < C; j++)
+			cin >> RC[i][j];
+	for (int i = 0; i < R; i++)
+		for (int j = 0; j < C; j++)
+		{
+			if (!check[i][j]&&RC[i][j] != '#')
+			{
+				if (RC[i][j] == 'o')
+					tempO++;
+				else if (RC[i][j] == 'v')
+					tempV++;
+				dfs(i, j);
+				//cout<<"삭제 전" << tempO << "  " << tempV << endl;
+
+				if (tempO > tempV)
+					tempV = 0;
+				else
+					tempO = 0;
+				o += tempO;
+				v += tempV;
+				//cout << tempO << "  "<<tempV << endl;
+				tempV = 0; tempO = 0;
+
+			}
+		}
+	
+	cout << o << " "<<v;
+}
