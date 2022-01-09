@@ -1,0 +1,200 @@
+#include<iostream>
+
+using namespace std;
+
+char starSystem[500][500];
+int check[500][500];
+int R, C, PR, PC;
+
+
+
+
+int main()
+{
+	
+	int max = -1;
+	cin >> R >> C;
+	for (int i = 0; i < R; i++)
+		for (int j = 0; j < C; j++)
+			cin >> starSystem[i][j];
+
+	cin >> PR >> PC;
+	//U: 위, R: 오른쪽, D: 아래, L: 왼쪽
+	int count=0;
+	char pre = 'U',answer='U';
+	
+	int a = 4;
+	bool b = false;
+	while (a--) {
+		int i = PR - 1, j = PC - 1;
+		
+		if (a == 3)
+			pre = 'U';
+		else if (a == 2)
+			pre = 'R';
+		else if (a == 1)
+			pre = 'D';
+		else
+			pre = 'L';
+		for (int x = 0; x < 500; x++)
+			for (int y = 0; y < 500; y++)
+				check[x][y] = 0;
+		while (true)	//, '/'와 '\'는 행성을, C는 블랙홀을, '.'는 빈 칸
+		{
+			//cout << a<< "    "<< i << " " << j <<"  "<<pre<<"  "<<count<< endl;
+			if (i < 0 || i >= R || j < 0 || j >= C || starSystem[i][j] == 'C')
+			{
+
+				break;
+			}
+			/*if (!(count==0)&&i == (PR - 1) && j == (PC - 1))
+			{
+				if (a == 3)
+					answer = 'U';
+				else if (a == 2)
+					answer = 'R';
+				else if (a == 1)
+					answer = 'D';
+				else
+					answer = 'L';
+				cout << answer << endl;
+				
+				cout << "Voyager" << endl;
+				return 0;
+			}*/
+
+			if (starSystem[i][j] == '.')
+			{
+				if (pre == 'U')
+					i--;
+				else if (pre == 'D')
+					i++;
+				else if (pre == 'R')
+					j++;
+				else
+					j--;
+				count++;
+				continue;
+			}
+			if (starSystem[i][j] == '\\' )
+			{
+				if (check[i][j] > 4)
+				{
+					b = true;
+					break;
+				}
+				if (pre == 'U')
+				{
+					check[i][j] ++;
+					j--; count++; pre = 'L';
+
+					//cout<<"aaaaa"<<i<<"  "<<j<<endl;
+					continue;
+				}
+				else if (pre == 'L')
+				{
+					check[i][j] ++;
+
+					i--; count++; pre = 'U';
+
+					continue;
+				}
+				else if (pre == 'R')
+				{
+					check[i][j] ++;
+
+					i++; count++; pre = 'D';
+
+					continue;
+				}
+				else if (pre == 'D')  //   /
+				{
+					check[i][j] ++;
+
+					j++; count++; pre = 'R';
+					continue;
+				}
+
+			}
+
+			if (starSystem[i][j] == '/')  // 
+			{
+				if (check[i][j] > 4)
+				{
+					b = true;
+					break;
+				}
+				if (pre == 'U')
+				{
+					check[i][j] ++;
+
+					j++; count++; pre = 'R';
+
+
+					continue;
+				}
+				else if (pre == 'L')
+				{
+					check[i][j] ++;
+
+					i++; count++; pre = 'D';
+
+					continue;
+				}
+				else if (pre == 'R')
+				{
+					check[i][j] ++;
+
+					i--; count++; pre = 'U';
+
+					continue;
+				}
+				else if (pre == 'D')  //   
+				{
+					check[i][j] ++;
+
+					j--; count++; pre = 'L';
+					continue;
+				}
+
+			}
+			
+			
+		}
+		if (b)
+		{
+			
+			
+				if (a == 3)
+					answer = 'U';
+				else if (a == 2)
+					answer = 'R';
+				else if (a == 1)
+					answer = 'D';
+				else
+					answer = 'L';
+				cout << answer << "\n" << "Voyager" << endl;
+				return 0;
+			
+		}
+		else
+		{
+			if (count > max)
+			{
+				max = count;
+				if (a == 3)
+					answer = 'U';
+				else if (a == 2)
+					answer = 'R';
+				else if (a == 1)
+					answer = 'D';
+				else
+					answer = 'L';
+			}
+		}
+		count = 0;
+
+	}
+
+	cout << answer << "\n" << max;
+}
