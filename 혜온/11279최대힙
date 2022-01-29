@@ -1,0 +1,78 @@
+#include<iostream>
+
+using namespace std;
+int heap[100001];
+int heapSize;
+
+void swap(int A, int B)
+{
+	int temp = heap[A];
+	heap[A] = heap[B];
+	heap[B] = temp;
+}
+//클수록 위로
+void insert(int x)
+{
+	heap[++heapSize] = x;
+	
+	
+	int cur = heapSize;
+	while (cur != 1) {
+		if (heap[cur] > heap[cur/2])
+		{
+			swap(cur, cur/2);
+			cur = cur / 2;
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
+int pop()
+{
+	if (heapSize == 0)
+		return 0;
+	
+	int answer = heap[1];
+	heap[1] = heap[heapSize--];//heap의 마지막은 이제 사용 x
+	int cur = 1;
+
+	while (cur*2<=heapSize)
+	{
+	
+		//if (heap[cur*2] <= heapSize)//자식이 존재하는지s
+		//{
+			int child = cur * 2;
+			if (child + 1 <= heapSize && heap[child + 1] >= heap[child])
+				child++;
+
+			if (heap[child] > heap[cur])
+			{
+				swap(child, cur);
+				cur = child;
+			
+				continue;//1
+			}
+		//}
+	
+			break;//2 이거 두개 안 넣으면 시간초과
+	}
+	
+	return answer;
+}
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+	int x, n;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> x;
+		if (x == 0)cout << pop() << '\n';
+		else insert(x);
+	}
+}
