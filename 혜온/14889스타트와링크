@@ -1,0 +1,82 @@
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+
+int num[20][20];
+int n;
+int half,startSum,linkSum,min1=1000;
+int start[20];
+//int link[10];
+
+
+void sum()
+{
+	for (int i = 0; i < n; i++)//0 3
+	{
+		for (int j = i; j < n; j++)
+		{
+			if (start[i] && start[j])
+			{
+				startSum += num[i][j];
+				startSum += num[j][i];
+			}
+			if (!start[i] && !start[j])
+			{
+				linkSum += num[i][j];
+				linkSum += num[j][i];
+			}
+		}
+
+	}
+	//cout << abs(startSum - linkSum) << endl;
+	if (min1 > abs(startSum - linkSum))
+		min1 = abs(startSum - linkSum);
+	
+	//cout << min << endl;
+}
+void dfs(int depth, int index)
+{
+	if (depth == n/2)
+	{
+		/*for (int i = 0; i < n; i++)
+		{
+			if (start[i])
+				cout << i << "  ";
+		}
+		cout << endl;*/
+		sum();
+
+		//memset(start, 0, sizeof(start));
+		startSum = 0; linkSum = 0;
+		return;
+	}
+	for (int i = index; i < n; i++)
+	{
+		//start[depth] = index;
+		//link[depth] = n - index;
+		start[i] = true;
+		dfs(depth + 1, i + 1);
+		start[i] = false;
+		
+	}
+	
+}
+
+
+
+int main()
+{
+	cin >> n;
+	//half = n / 2;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cin >> num[i][j];
+		}
+	}
+
+	dfs(0, 0);
+	cout << min1;
+}
