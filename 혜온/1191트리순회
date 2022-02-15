@@ -1,0 +1,102 @@
+#include<iostream>
+#include<vector>
+#include<string>
+
+using namespace std;
+
+int n;
+char node[53];
+string ans;
+
+void preorder(int index) //전위   root-L-R
+{
+	if (node[index]=='.')
+		return;
+	else {
+
+		ans += node[index];
+		//cout <<index<<"  "<< ans << endl;
+		preorder(index * 2);
+		preorder(index * 2 + 1);
+	}
+}
+
+void inorder(int index)  //중위  L-root_R
+{
+	if (node[index] == '.')
+		return;
+	
+	inorder(index * 2);
+	ans += node[index ];
+	inorder(index * 2 + 1);
+	
+}
+
+
+void postorder(int index) //후위  L-R-root
+{
+	if (node[index] == '.')
+	{
+		
+		return;
+	}
+
+	postorder(index * 2);
+	postorder(index * 2 + 1);
+	ans += node[index];
+	
+	
+	
+	
+	
+}
+int main()
+{
+	cin >> n;
+	//1 2 3 4 5
+	for (int i = 1; i < 53; i++)
+		node[i] = '.';
+	node[1] = 'A';
+	//for (int i = 1; i <= n; i++)
+	//{
+	//	if (node[i] == '.')
+	//		continue;
+	//	cin >> node[52] >> node[i * 2] >> node[i * 2 + 1];
+	//	//cout << i << "  " << node[i] << "   " << i * 2 << node[i * 2] << "   " << i * 2 + 1 << "   " << node[i * 2 + 1] << endl;
+	//}
+
+	char rt, l, r;
+	int abc[27];
+	abc[1] = 1;
+	int index = 0;
+	for (int i = 1; i <= n; i++) {
+		
+		cin >> rt >> l >> r;
+		index = abc[rt - 'A'+1]; //A->1  D->4
+		//알파벳의 인덱스 저장
+		if (l - 'A' >= 0)
+			abc[l - 'A'+1] = index * 2;
+		node[index*2] = l;
+		if (r - 'A' >= 0)
+			abc[r - 'A'+1] = index * 2+1;
+		node[index*2+1] = r;
+		
+	}
+
+	/*for (int i = 1; i <= 53; i++)
+	{
+		cout << i << " " << node[i] << endl;
+	}*/
+	preorder(1);
+	cout << ans<<endl;
+	ans = "";
+	inorder(1);
+	cout << ans<<endl;
+	ans = "";
+	postorder(1) ;
+	cout << ans;
+	
+
+
+
+}
