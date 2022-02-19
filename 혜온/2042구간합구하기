@@ -1,0 +1,83 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+vector<long long>num;
+vector<long long>tree;
+
+//재귀
+long long init(long long start,long long end,long long node)
+{
+	if (start == end) return tree[node] = num[start];
+	long long mid = (start + end) / 2;
+	//1 부터 시작해서 왼쪽자식 , 오른쪽 자식 순서대로 구하기
+	return tree[node] = init(start, mid, node * 2) + init(mid + 1, end, node * 2 + 1);
+}
+
+//합 구하는 함수
+
+long long sum(long long start, long long end, long long node, long long left, long long right)
+{
+	// 범위를 벗어난 경우 
+	if (left > end || right<start) return 0;
+	//범위 안에 있는 경우 3~8 까지 구할때 start=
+	if (left <= start && end <= right) return tree[node];
+	
+	long long mid = (start + end) / 2;
+	return sum(start, mid, node * 2, left, right) + sum(mid + 1, end, node * 2 + 1, left, right);
+}
+
+// 값을 변경하는 함수
+void update(long long start, long long end, long long node, long long index, long long dif) {
+	if (index<start || index>end) return;
+
+	tree[node] += dif;
+	if (start == end) return;
+	long long mid = (start + end) / 2;
+	update(start,mid, node * 2, index, dif);
+	update(mid+1, end, node * 2 +1 , index, dif);
+
+}
+
+int main()
+{
+	long long N, M, K;
+	cin >> N >> M >> K;
+	tree.resize(N * 4);
+	long long temp = 0;
+	for (int i = 0; i < N; i++)
+	{
+		cin >> temp;
+		num.push_back(temp);
+	}
+	init(0, N - 1, 1);
+
+	/*for (int i = 1; i <= N; i++)
+		cout << tree[i] << endl;*/
+	//구간 합 트리 생성하기
+	//시작 인덱스, 끝 인덱스   tree는 1부터 시작
+
+	//cout << tree[0] << " " << tree[1] << " " << tree[2] << endl;
+	long long a, b, c,dif=0;
+	for (int i = 0; i < M + K; i++)
+	{
+		cin >> a >> b >> c;
+		if (a==1)
+		{
+			//5 ->3 dif =-2
+			dif = c-num[b-1 ];
+			num[b-1 ] = c;
+			update(0, N - 1, 1, b-1, dif);
+		}
+		if (a == 2)
+		{
+			cout<<sum(0, N - 1, 1, b-1, c-1)<<endl;
+		}
+	}
+	
+	//a b c a==1 b->c,  a==2 2 b~c 더하기
+
+	
+	
+}
