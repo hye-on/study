@@ -1,0 +1,32 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int T;
+	int N, M;
+	
+	cin >> T;
+	while (T--)
+	{
+		long long ans = 1;
+		cin >> N >> M; //m C n
+		int temp = M - N;
+		int i = 0;
+		if (temp < N)
+			N = temp;
+		while (i<N)
+		{
+			ans *= M--;
+			i++;
+			//cout<<"1     " << ans<<endl;
+		}
+		while (N>0)
+		{
+			ans /= N--;
+			//cout <<"2  "<< ans << endl;
+		}
+		cout << ans << endl;
+	}
+}
