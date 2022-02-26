@@ -1,0 +1,56 @@
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+
+int n;
+int num[300];
+int dp[300];
+
+int main()
+{
+	//3회연속 한 계단 씩 X, 한 계단 or 두 계단 
+	
+	//int dp[300];
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> num[i];
+		dp[i] = num[i];
+		
+	}
+	bool check = false;
+	int answer = -1;
+	//cout << endl;
+	for (int i = 1; i < n; i++)
+	{
+		//for (int j = 0; j < i; j++)
+		//{
+		if (dp[i] < dp[i - 2] + num[i])
+		{
+			dp[i] = dp[i - 2] + num[i];
+			
+
+		}
+		
+		if (dp[i] <= dp[i - 3] + num[i-1]+num[i] ) //dp[i-1]+num[i] 가 아니다. dp[i-1]이 최대일때 그 전에 한칸만 뛰었다면 dp[i-1+num[i]는 할 수 없다. 한 칸만 뛰려면 그 전에 두칸을 뛰어야 하므로 dp[i - 3] + num[i-1] + num[i] 와 비교해야함
+		{
+			dp[i] = dp[i - 3] + num[i - 1] + num[i];
+			
+
+		}
+
+		
+		//cout << dp[i].first <<  "  "<< dp[i].second <<endl;
+
+		//}
+		
+		
+			
+	}
+	cout << dp[n-1];
+	
+
+	
+
+}
